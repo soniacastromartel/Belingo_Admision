@@ -1,0 +1,139 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-button slot="start" fill="clear" (click)="onClick()">
+      <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+    </ion-button>
+    <ion-title class="uname">Ficha de Cliente</ion-title>
+    <img slot="end" src="/assets/img/Belingologo.png" width="25px" style="display:inline-block" height="25px" />
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen class="ion-padding">
+
+  <form (ngSubmit)="onSubmit(formulario)" role="form" #formulario="ngForm">
+    <div>
+      <div>
+        <ion-list class="custom">
+          <ion-list-header color="none"><u> <strong>DATOS PERSONALES</strong> </u> </ion-list-header>
+
+          <ion-item>
+            <ion-img src={{img}}></ion-img>
+          </ion-item>
+
+          <ion-grid fixed>
+            <ion-row>
+
+              <ion-col size="6">
+                <ion-item>
+                  <ion-label position="floating">DNI</ion-label>
+                  <ion-input type="text" placeholder="Introduzca el número" name="dni" [(ngModel)]="dni" required>
+                  </ion-input>
+                </ion-item>
+              </ion-col>
+
+              <ion-col size="6">
+                <ion-item>
+                  <ion-label position="floating">Sexo</ion-label>
+                  <ion-select placeholder="Seleccione" name="sexo" [(ngModel)]="sexo" required>
+                    <ion-select-option value="mujer">Mujer</ion-select-option>
+                    <ion-select-option value="hombre">Hombre</ion-select-option>
+                    <ion-select-option value="nc">NC</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+
+            </ion-row>
+          </ion-grid>
+
+
+          <ion-grid>
+            <ion-label position="floating">Nombre</ion-label>
+            <ion-row>
+
+              <ion-item>
+
+                <ion-input type="text" placeholder="Introduzca el nombre" name="nombre" [(ngModel)]="nombre" required>
+                </ion-input>
+
+                <ion-input type="text" placeholder="Introduzca apellido" name="apellido1" [(ngModel)]="apellido1"
+                  required>
+                </ion-input>
+
+                <ion-input type="text" placeholder="Introduzca apellido" name="apellido2" [(ngModel)]="apellido2"
+                  required>
+                </ion-input>
+
+
+              </ion-item>
+
+            </ion-row>
+          </ion-grid>
+
+
+          <ion-item>
+            <ion-label position="floating">Teléfono</ion-label>
+            <ion-input type="text" placeholder="Introduzca el teléfono" name="telefono" [(ngModel)]="telefono" required>
+            </ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Email</ion-label>
+            <ion-input type="email" placeholder="Introduzca el email" name="email" [(ngModel)]="email"
+              pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"></ion-input>
+          </ion-item>
+
+          <ion-grid>
+            <ion-row>
+              <ion-col size="6">
+
+                <ion-item>
+                  <ion-label position="floating">Fecha</ion-label>
+                  <ion-datetime [(ngModel)]="fecha" [value]="fecha" name="fecha" display-format="DD/MM/YYYY"
+                    min="1920-01-01" max="2003-01-01" (ionChange)="cambioFecha( $event )"></ion-datetime>
+                </ion-item>
+
+              </ion-col>
+              <ion-col size="6">
+
+                <ion-item>
+                  <ion-label position="floating">Conflictivo</ion-label>
+                  <ion-select placeholder="Seleccione" name="conflictivo" [value]="conflictivo"[(ngModel)]="conflictivo">
+                    <ion-select-option value="sí">Sí</ion-select-option>
+                    <ion-select-option value="no">No</ion-select-option>
+                  </ion-select>
+                </ion-item>
+
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+
+        </ion-list>
+
+        <ion-grid fixed>
+          <ion-row>
+
+              <ion-button (click)="registrarAcceso()"  shape="round" size="small">
+                <ion-icon slot="start" name="enter-outline"></ion-icon>
+                Acceso </ion-button>
+
+              <ion-button [disabled]="formulario.pristine"
+              shape="round" type="submit" color="primary"
+              size="small">
+              <ion-icon slot="start" name="create-outline"></ion-icon>
+                Editar
+              </ion-button>
+
+
+
+              <ion-button type="reset" shape="round" color="danger" size="small">
+                <ion-icon slot="start" name="trash-outline"></ion-icon>
+                Borrar
+              </ion-button>
+
+          </ion-row>
+        </ion-grid>
+      </div>
+    </div>
+  </form>
+
+</ion-content>

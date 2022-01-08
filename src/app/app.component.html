@@ -1,3 +1,28 @@
-<ion-app>
-  <ion-router-outlet></ion-router-outlet>
+<ion-app >
+  <ion-split-pane  contentId="menu-content" when="md">
+    <ion-menu contentId="menu-content" menuId="menu-content" side="start" type="overlay">
+      <ion-header>
+        <ion-toolbar color="primary">
+          <img slot="start" src="/assets/img/Belingologo.png" width="20px" style="display:inline-block" height="20px"/>
+          <ion-title>Belingo</ion-title>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content fullscreen>
+        <ion-list class="bg-none">
+          <ion-menu-toggle  *ngFor="let c of componentes|async">
+            <ion-item color="none"
+            [routerLink]="c.redirectTo"
+            [routerDirection]="'root'">
+            <ion-icon slot="start"
+            [name]="c.icon"></ion-icon>
+              <ion-label>{{c.name}}</ion-label>
+            </ion-item>
+          </ion-menu-toggle >
+        </ion-list>
+
+      </ion-content>
+    </ion-menu>
+    <ion-router-outlet id="menu-content"></ion-router-outlet>
+  </ion-split-pane>
 </ion-app>

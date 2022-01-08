@@ -1,0 +1,37 @@
+ion-button {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.centrado {
+  text-align: right;
+}
+
+ion-list.custom {
+  background: transparent;
+}
+
+
+ion-img {
+  width: 90px !important;
+  height: 90px !important;
+  opacity: 0.8;
+  margin-left: 15px;
+
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.play-full {
+  display: inline-block;
+  width: 100px;
+  height: 300px;
+  // margin-top: -50px;
+  margin: 0 auto;
+  background-size: 100%;
+}

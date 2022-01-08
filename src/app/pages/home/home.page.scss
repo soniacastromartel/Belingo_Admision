@@ -1,0 +1,38 @@
+ .container {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   height: 100%;
+ }
+
+ .play-full {
+   display: inline-block;
+   width: 161px;
+   height: 300px;
+  //  box-shadow:  10px 0px 10px black;
+  // margin-top: 150px;
+   margin: 0 auto;
+   background-size: 100%;
+ }
+
+ ion-img{
+   width: 160px !important;
+   height: 160px !important;
+   margin-top: 100px !important;
+ }
+
+ ion-button {
+   margin-left: 25px;
+ }
+
+
+//  body {
+//   cursor: url('https://ionicframework.com/img/finger.png'), auto;
+// }
+
+
+
+
+
+
+

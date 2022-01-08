@@ -1,0 +1,23 @@
+[
+  {
+    "icon": "home-outline",
+    "name": "Home",
+    "redirectTo":"/"
+  },
+  {
+    "icon": "stats-chart-outline",
+    "name": "Sesión",
+    "redirectTo":"/session"
+  },
+  {
+    "icon": "people-outline",
+    "name": "Clientes",
+    "redirectTo":"/clients"
+  },
+  {
+    "icon": "log-out-outline",
+    "name": "Logout",
+    "redirectTo":"/login"
+  }
+
+]

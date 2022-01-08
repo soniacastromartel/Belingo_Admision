@@ -24,3 +24,44 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+.uname
+{
+  text-transform: capitalize !important;
+}
+
+.input {
+  background: none !important;
+}
+
+ion-content {
+  --background: linear-gradient(#1c8590,#ff9800);
+}
+
+
+// body {
+//   cursor: url('https://ionicframework.com/img/finger.png'), auto;
+// }
+
+// ion-toolbar {
+// --ion-toolbar-background-color: transparent;
+// --ion-toolbar-text-color: white;
+// }
+
+ion-toolbar {
+  --ion-background-color: transparent;
+  --ion-toolbar-color: white;
+
+}
+
+ion-item {
+  --ion-item-background:none;
+}
+
+ion-list {
+  --ion-list-background:none !important;
+}
+
+.bg-transparent {
+  background: transparent;
+}
