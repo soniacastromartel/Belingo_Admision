@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
-import { DataService } from 'src/app/services/data.service';
+import { DataService } from 'src/app/services/client.service';
 
 import { Client } from 'src/app/models/client';
 import { Observable } from 'rxjs';
@@ -13,6 +13,8 @@ import {
 import { AltasPage } from '../altas/altas.page';
 import { ModalFichaPage } from '../modal-ficha/modal-ficha.page';
 import { IClient } from 'src/app/interfaces/iclient';
+import { Access } from 'src/app/interfaces/iaccess';
+import { EntranceService } from 'src/app/services/entrance.service';
 
 @Component({
   selector: 'app-listado',
@@ -41,7 +43,19 @@ export class ListadoPage implements OnInit {
     fechaNaci: '',
   };
 
+  acceso = {
+    fechaHoraEntrada: '',
+    dni: '',
+    sexo: '',
+    conflictivo: '',
+    clientKey: ''
+
+  };
+
   message = '';
+
+  fecha: Date = new Date();
+
 
   container = document.getElementById('container');
 
@@ -50,7 +64,8 @@ export class ListadoPage implements OnInit {
   constructor(
     private dataService: DataService,
     private alertCtrl: AlertController,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private entranceService: EntranceService
   ) {
     // this.clients = this.dataService.getClients();
   }
@@ -138,6 +153,25 @@ export class ListadoPage implements OnInit {
     await alert.present();
   }
 
+  async presentAccessAlert(nombre: string, apellido: string) {
+    const alert = await this.alertCtrl.create({
+      backdropDismiss: false,
+      header: 'Accesos',
+      subHeader: 'El acceso para el cliente '+ nombre+' '+apellido+ ' se ha realizado con éxito',
+      buttons: [
+        {
+          text: 'Aceptar',
+          role: 'cancel',
+          handler: () => {
+            this.ionList.closeSlidingItems();
+          },
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
   async showModal(client, id) {
     const modal = await this.modalCtrl.create({
       component: ModalFichaPage,
@@ -169,12 +203,35 @@ export class ListadoPage implements OnInit {
       email: data.email,
       img: data.img,
       fechaNaci: data.fechaNaci,
+      conflictivo: data.conflictivo
     };
     this.updateClient(id, client);
     this.ionList.closeSlidingItems();
     console.log(id);
     console.log(client);
     console.log(data);
+
+  }
+
+  registrarAcceso(client, id) {
+    console.log(id);
+    this.acceso = {
+      fechaHoraEntrada: this.fecha.toISOString(),
+      dni: client.dni,
+      conflictivo: client.conflictivo,
+      sexo: client.sexo,
+      clientKey: id
+    };
+    console.log(this.acceso);
+    this.entranceService.createAcceso(this.acceso).then((res) => {
+      this.presentAccessAlert(client.nombre, client.apellido1);
+
+      console.log(res.key);
+      console.log('registrado acceso');
+      // this.modalCtrl.dismiss();
+
+    })
+    .catch((error) => console.log(error));
 
   }
 }

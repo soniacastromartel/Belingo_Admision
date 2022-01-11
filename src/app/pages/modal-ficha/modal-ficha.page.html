@@ -1,8 +1,5 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-button slot="start" fill="clear" (click)="onClick()">
-      <ion-icon slot="icon-only" name="close-outline"></ion-icon>
-    </ion-button>
     <ion-title class="uname">Ficha de Cliente</ion-title>
     <img slot="end" src="/assets/img/Belingologo.png" width="25px" style="display:inline-block" height="25px" />
   </ion-toolbar>
@@ -112,22 +109,17 @@
         <ion-grid fixed>
           <ion-row>
 
-              <ion-button (click)="registrarAcceso()"  shape="round" size="small">
-                <ion-icon slot="start" name="enter-outline"></ion-icon>
-                Acceso </ion-button>
-
               <ion-button [disabled]="formulario.pristine"
-              shape="round" type="submit" color="primary"
-              size="small">
+            type="submit" color="primary">
               <ion-icon slot="start" name="create-outline"></ion-icon>
                 Editar
               </ion-button>
 
 
 
-              <ion-button type="reset" shape="round" color="danger" size="small">
-                <ion-icon slot="start" name="trash-outline"></ion-icon>
-                Borrar
+              <ion-button color="danger"  (click)="onClick()">
+                <ion-icon slot="start" name="log-out-outline"></ion-icon>
+                Salir
               </ion-button>
 
           </ion-row>

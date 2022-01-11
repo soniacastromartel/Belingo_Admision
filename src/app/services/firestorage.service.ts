@@ -163,7 +163,8 @@ export class FireStorageService {
     return new Promise((resolve) => {
       const filePath = path + '/' + nombre;
       const ref = this.storage.ref(filePath);
-      const task = ref.putString(file);
+      //const task = ref.putString(file);
+      const task = ref.put(file);
 
       task
         .snapshotChanges()
@@ -179,7 +180,7 @@ export class FireStorageService {
         )
         .subscribe();
 
-      resolve('este es el enlace');
+      // resolve('este es el enlace');
     });
   }
 }

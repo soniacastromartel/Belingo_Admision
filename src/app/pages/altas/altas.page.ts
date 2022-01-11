@@ -1,22 +1,25 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
-import { DataService } from 'src/app/services/data.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { DataService } from 'src/app/services/client.service';
 
 import { FireStorageService } from 'src/app/services/firestorage.service';
 
+import * as uuid from 'uuid';
+
 import { Filesystem, Directory } from '@capacitor/filesystem';
 
-
-import {
-  Camera,
-  CameraResultType,
-  CameraSource
-} from '@capacitor/camera';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 
 import * as moment from 'moment';
-import { ActionSheetController, IonDatetime, LoadingController, Platform } from '@ionic/angular';
+import {
+  ActionSheetController,
+  IonDatetime,
+  LoadingController,
+  Platform,
+} from '@ionic/angular';
 import { Router } from '@angular/router';
-import {Clientphoto } from 'src/app/interfaces/iclientphoto';
+import { Clientphoto } from 'src/app/interfaces/iclientphoto';
+import { Capacitor } from '@capacitor/core';
 
 @Component({
   selector: 'app-altas',
@@ -41,8 +44,10 @@ export class AltasPage implements OnInit {
     email: '',
     img: '',
     fechaNaci: '',
-    conflictivo: ''
+    conflictivo: '',
   };
+
+  img: '';
 
   customPickerOptions = {
     buttons: [
@@ -62,10 +67,10 @@ export class AltasPage implements OnInit {
     private fb: FormBuilder,
     private plt: Platform,
     public actionSheetController: ActionSheetController,
-  public fireStorageService: FireStorageService
+    public fireStorageService: FireStorageService
   ) {}
 
- async ngOnInit() {
+  async ngOnInit() {
     // await this.fireStorageService.loadSaved();
     this.clientForm = this.fb.group({
       nombre: [''],
@@ -84,22 +89,25 @@ export class AltasPage implements OnInit {
   onSubmit() {
     if (this.clientForm.valid) {
       this.client = this.clientForm.value;
-      console.log(this.clientForm.value);
-      console.log(this.client);
+      this.savePhoto().then(() => {
+        console.log(this.clientForm.value);
+        console.log(this.client);
+        console.log(this.client.img);
 
-      this.dataService
-        .createClient(this.clientForm.value)
-        .then((res) => {
-          console.log(res);
-          console.log(res.key);
-          this.clientForm.reset();
-        })
-        .catch((error) => console.log(error));
+        this.dataService
+          .createClient(this.client)
+          .then((res) => {
+            console.log(this.client);
+            console.log(res);
+            console.log(res.key);
+            this.clientForm.reset();
+          })
+          .catch((error) => console.log(error));
+      });
     } else {
       return false;
     }
   }
-
 
   //PHOTO
   onClick() {
@@ -107,71 +115,104 @@ export class AltasPage implements OnInit {
     console.log('take a pic!');
   }
 
-  // takePicture = async () => {
-  //   const image = await Camera.getPhoto({
-  //     quality: 90,
-  //     allowEditing: true,
-  //     resultType: CameraResultType.Uri,
-  //   });
+   newImageUpload(file: File) {
+    const path = 'Clientes';
+    // const name = 'prueba.jpg';
+    // const file = event.target.files [0];
+    const res = this.fireStorageService.uploadImage(file, path, file.name);
 
-  //   // image.webPath will contain a path that can be set as an image src.
-  //   // You can access the original file using image.path, which can be
-  //   // passed to the Filesystem API to read the raw data of the image,
-  //   // if desired (or pass resultType: CameraResultType.Base64 to getPhoto)
-  //   const imageUrl = image.webPath;
-  //   console.log(imageUrl);
-  //   if (image) {
-  //     console.log(imageUrl);
-  //     this.newImageUpload(imageUrl);
+    res.then((data) => {
+      console.log(data);
+      this.client.img = data;
+      console.log(this.client.img);
+    });
+  }
 
-  //   }
-  //   // Can be set to the src of an image now
-  //   // imageElement.src = imageUrl;
-  // };
+  async savePhoto() {
+    const photo = this.fireStorageService.photos[0];
+    console.log(photo);
 
-  async newImageUpload(file: any)
-{
-  const path = 'Clientes';
-  const name = 'prueba.jpg';
-// const file = event.target.files [0];
-  const res= await this.fireStorageService.uploadImage(file, path, name);
-  console.log(res);
-  this.client.img = res;
+    let imageFile;
+    const pr1 = fetch(photo.webviewPath);
+    const pr2 = pr1.then((x) => x.blob());
+    const pr3 = pr2.then((data) => {
+      imageFile = new File([data], uuid.v4() + '_' + photo.filepath, {
+        type: 'image/png',
+      });
 
-}
+      //this.newImageUpload(imageFile);
 
- async showActionSheet(photo: Clientphoto, position: number) {
-  const actionSheet = await this.actionSheetController.create({
-    header: 'Fotos',
-    buttons: [
-      {
-        text: 'Aceptar',
-        role: 'selected',
-        icon: 'add',
-        handler: () => {
-          console.log(photo.filepath);
+      const path = 'Clientes';
+      // const name = 'prueba.jpg';
+      // const file = event.target.files [0];
+      const res = this.fireStorageService.uploadImage(
+        imageFile,
+        path,
+        imageFile.name
+      );
 
-          this.newImageUpload(photo.filepath);
-        }
-      },
-      {
-      text: 'Borrar',
-      role: 'destructive',
-      icon: 'trash',
-      handler: () => {
-        this.fireStorageService.deletePicture(photo, position);
-      }
-    }, {
-      text: 'Cancelar',
-      icon: 'close',
-      role: 'cancel',
-      handler: () => {
-       }
-    }]
-  });
-  await actionSheet.present();
-}
+      return res.then((imgUri) => {
+        console.log(imgUri);
+        this.client.img = imgUri;
+        console.log(this.client.img);
+      });
+    });
 
+    await pr1;
+    await pr2;
+    await pr3;
+    // .then((x) => x.blob())
+    // .then((data) => {
+    //   imageFile = new File([data], uuid.v4() + '_' + photo.filepath, {
+    //     type: 'image/png',
+    //   });
+
+    //   this.newImageUpload(imageFile);
+    // });
+  }
+
+  async showActionSheet(photo: Clientphoto, position: number) {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Fotos',
+      buttons: [
+        {
+          text: 'Aceptar',
+          role: 'selected',
+          icon: 'add',
+          handler: () => {
+            console.log(photo);
+            console.log('Ha pasado por el base64 harcodeado');
+
+            let imageFile;
+            fetch(photo.webviewPath)
+              .then((x) => x.blob())
+              .then((data) => {
+                imageFile = new File([data], uuid.v4() + '_' + photo.filepath, {
+                  type: 'image/png',
+                });
+
+                this.newImageUpload(imageFile);
+              });
+          },
+        },
+        {
+          text: 'Borrar',
+          role: 'destructive',
+          icon: 'trash',
+          handler: () => {
+            this.fireStorageService.deletePicture(photo, position);
+          },
+        },
+        {
+          text: 'Cancelar',
+          icon: 'close',
+          role: 'cancel',
+          handler: () => {},
+        },
+      ],
+    });
+    await actionSheet.present();
+  }
 
   cambioFecha(event) {
     console.log(new Date(event.detail.value));

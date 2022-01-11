@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
-import { DataService } from 'src/app/services/data.service';
+import { DataService } from 'src/app/services/client.service';
+import { EntranceService } from 'src/app/services/entrance.service';
 
 @Component({
   selector: 'app-modal-ficha',
@@ -36,9 +37,11 @@ export class ModalFichaPage implements OnInit {
     conflictivo: ''
   };
 
+
   constructor(
     private modalCtrl: ModalController,
-    private dataService: DataService
+    private dataService: DataService,
+    private entranceService: EntranceService
   ) {}
 
   ngOnInit() {}
@@ -58,25 +61,11 @@ export class ModalFichaPage implements OnInit {
       sexo: formulario.value.sexo,
       email: formulario.value.email,
       fechaNaci:this.fecha,
-      conflictivo: this.conflictivo
+      conflictivo: formulario.value.conflictivo
     });
-    // this.client.nombre= this.nombre;
-    // this.client.apellido1= this.apellido1;
-    // this.client.apellido2= this.apellido2;
-    // this.client.dni= this.dni;
-    // this.client.email= this.email;
-    // this.client.sexo= this.sexo;
-    // this.client.telefono= this.telefono;
-    // this.client.fechaNaci= this.fecha;
-    // this.client.img= this.img;
 
-    // console.log(this.client);
-    // console.log('hola');
-    // this.dataService.updateClient(this.client).then((data) => {
-    //   console.log(data.key);
-    //   console.log('actualizado');
-    // });
   }
+
 
   cambioFecha(event) {
     // console.log(event);
@@ -85,7 +74,4 @@ export class ModalFichaPage implements OnInit {
     // console.log('date', moment(date).format('DD-MM-YYYY'));
   }
 
-  registrarAcceso(){
-
-  }
 }

@@ -1,4 +1,4 @@
-<app-header2 titulo="Altas"></app-header2>
+<app-header2 titulo="Altas" link="/clients"></app-header2>
 
 <ion-content fullscreen class="ion-padding">
 
@@ -13,7 +13,7 @@
             <ion-label><strong>FOTO CLIENTE</strong> </ion-label>
 
             <ion-item *ngFor="let photo of fireStorageService.photos; index as position">
-              <ion-img [src]="photo.webviewPath" (click)="showActionSheet(photo, position)">
+              <ion-img [src]="photo.webviewPath" (click)="showActionSheet(photo, position)"  >
               </ion-img>
             </ion-item>
 
@@ -27,18 +27,6 @@
       <ion-icon slot="start" name="camera-outline"></ion-icon>
       Cámara
     </ion-button>
-
-    <!-- <ion-row>
-        <ion-col size="6" *ngFor="let photo of fireStorageService.photos; index as position">
-          <ion-img [src]="photo.webviewPath" (click)="showActionSheet(photo, position)"></ion-img>
-        </ion-col>
-        </ion-row> -->
-
-    <!-- <ion-img src="assets/img/user.png"></ion-img> -->
-    <!-- <ion-button (click)="onClick()" shape="round">
-        <ion-icon slot="start" name="camera-outline"></ion-icon>
-        Cámara
-      </ion-button> -->
 
 
 

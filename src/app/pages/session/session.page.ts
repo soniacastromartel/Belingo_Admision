@@ -1,5 +1,7 @@
 /* eslint-disable max-len */
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-session',
@@ -10,11 +12,19 @@ export class SessionPage implements OnInit{
 
 
 
-  constructor() { }
+  constructor(private router: Router,
+    private authService: AuthenticationService) { }
 
 
   ngOnInit()  {
 
   }
-}
+
+  onClick() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
+    }
+
+  }
+
 

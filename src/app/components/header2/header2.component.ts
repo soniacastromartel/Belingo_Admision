@@ -8,6 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class Header2Component implements OnInit {
 
   @Input() titulo: string;
+  @Input() link: string;
 
   constructor() { }
 

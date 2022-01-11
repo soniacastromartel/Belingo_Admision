@@ -1,0 +1,29 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="white" defaultHref="/session">
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title class="uname">Listado de Accesos</ion-title>
+    <img slot="end" src="/assets/img/Belingologo.png" width="25px" style="display:inline-block" height="25px" />
+  </ion-toolbar>
+  <ion-searchbar placeholder="Buscar" inputmode="text" (ionChange)="onSearchChange($event)" [debounce]="250">
+  </ion-searchbar>
+</ion-header>
+<ion-content fullscreen class="ion-padding">
+  <ion-label>
+    <strong><u>Accesos</u></strong>
+    </ion-label>
+  <ion-list class="bg-transparent">
+
+    <ion-item  *ngFor="let a of Accesos |filtro: textoBuscar">
+      <ion-label><b>{{a.fechaHoraEntrada | date: 'shortDate'}} {{a.fechaHoraEntrada | date: 'shortTime'}}</b>
+        <p>Cliente: {{a.dni}}</p>
+        <p></p>
+        <p>{{a.sexo}}</p>
+        <p>Conflictivo: {{a.conflictivo}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

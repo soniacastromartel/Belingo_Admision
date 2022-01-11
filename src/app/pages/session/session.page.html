@@ -1,7 +1,49 @@
 <app-header titulo="sesión"></app-header>
 
-<ion-content fullscreen>
+<ion-content fullscreen class="ion-padding">
+  <ion-grid fixed>
+  <ion-row>
+    <ion-col>
+      <div class="container">
+        <div class="play-full">
+          <ion-img src="./assets/img/piechart.png"></ion-img>
+        </div>
+      </div>
 
- 
+    </ion-col>
+  </ion-row>
+</ion-grid>
 
+<ion-grid>
+
+  <ion-row>
+    <ion-col size="12">
+      <!-- <ion-button routerLink="/visitas" expand="block" color="primary" shape="round">
+        <ion-icon slot="start" name="enter-outline"></ion-icon>
+        Registrar Visita
+      </ion-button> -->
+      <ion-button routerLink="/listado-accesos" expand="block" color="primary" shape="round">
+        <ion-icon slot="start" name="list-outline"></ion-icon>
+      Listado Accesos
+      </ion-button>
+
+      <ion-button routerLink="/resumen" expand="block" color="primary" shape="round">
+        <ion-icon slot="start" name="document-text-outline"></ion-icon>
+        Resumen Sesión
+      </ion-button>
+
+      <ion-button routerLink="/estadistica" expand="block" color="primary" shape="round">
+        <ion-icon slot="start" name="stats-chart-outline"></ion-icon>
+        Estadísticas
+      </ion-button>
+
+      <ion-button (click)="onClick()" expand="block" color="danger" shape="round">
+        <ion-icon slot="start" name="power-outline"></ion-icon>
+        Cerrar Sesión
+      </ion-button>
+
+    </ion-col>
+  </ion-row>
+
+</ion-grid>
 </ion-content>

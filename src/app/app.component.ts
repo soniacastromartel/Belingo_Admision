@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Componente } from './interfaces/icomponent';
-import { DataService } from './services/data.service';
+import { DataService } from './services/client.service';
 
 import {Globalization} from '@ionic-native/globalization/ngx';
 import {TranslateService} from '@ngx-translate/core';

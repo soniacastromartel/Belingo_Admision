@@ -40,6 +40,18 @@ const routes: Routes = [
     path: 'modal-ficha',
     loadChildren: () => import('./pages/modal-ficha/modal-ficha.module').then( m => m.ModalFichaPageModule)
   },
+  {
+    path: 'estadistica',
+    loadChildren: () => import('./pages/estadistica/estadistica.module').then( m => m.EstadisticaPageModule)
+  },
+  {
+    path: 'listado-accesos',
+    loadChildren: () => import('./pages/listado-accesos/listado-accesos.module').then( m => m.ListadoAccesosPageModule)
+  },
+  {
+    path: 'resumen',
+    loadChildren: () => import('./pages/resumen/resumen.module').then( m => m.ResumenPageModule)
+  },
 ];
 
 @NgModule({

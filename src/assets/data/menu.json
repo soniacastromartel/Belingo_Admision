@@ -2,7 +2,7 @@
   {
     "icon": "home-outline",
     "name": "Home",
-    "redirectTo":"/"
+    "redirectTo":"/home"
   },
   {
     "icon": "stats-chart-outline",

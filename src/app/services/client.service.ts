@@ -14,7 +14,7 @@ import { IClient } from '../interfaces/iclient';
 })
 export class DataService {
   clients: AngularFireList<any>;
-  client: AngularFireObject<IClient>;
+  client: AngularFireObject<any>;
 
   dbPath = '/clients';
 
@@ -71,7 +71,7 @@ export class DataService {
       // img: client.img,
       fechaNaci: client.fechaNaci,
       sexo: client.sexo,
-      // conflictivo: client.conflictivo
+      conflictivo: client.conflictivo
     });
   }
 }

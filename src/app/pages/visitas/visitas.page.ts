@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IClient } from 'src/app/interfaces/iclient';
 import { Client } from 'src/app/models/client';
-import { DataService } from 'src/app/services/data.service';
+import { DataService } from 'src/app/services/client.service';
 
 @Component({
   selector: 'app-visitas',
