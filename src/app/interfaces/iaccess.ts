@@ -1,7 +1,8 @@
 export interface Access {
   $key: string;
-  fechaHoraEntrada: string;
   clientKey: string;
+  sessionKey: string;
+  horaEntrada: string;
   dni: string;
   conflictivo: string;
   sexo: string;

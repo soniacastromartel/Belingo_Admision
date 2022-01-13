@@ -8,7 +8,7 @@ import { Access } from '../interfaces/iaccess';
 export class EntranceService {
 
   accesos: AngularFireList<any>;
-  acceso: AngularFireObject<any>;
+  acceso: AngularFireObject<Access>;
 
   dbPath = '/accesos';
 
@@ -24,11 +24,12 @@ export class EntranceService {
 
 createAcceso(acceso: any) {
   return this.accesos.push({
-    fechaHoraEntrada: acceso.fechaHoraEntrada,
+    horaEntrada: acceso.horaEntrada,
     dni: acceso.dni,
     sexo: acceso.sexo,
     conflictivo: acceso.conflictivo,
     clientKey: acceso.clientKey,
+    sessionKey: acceso.sessionKey
   });
 }
 

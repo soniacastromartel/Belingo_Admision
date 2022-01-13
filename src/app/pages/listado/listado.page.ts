@@ -15,6 +15,7 @@ import { ModalFichaPage } from '../modal-ficha/modal-ficha.page';
 import { IClient } from 'src/app/interfaces/iclient';
 import { Access } from 'src/app/interfaces/iaccess';
 import { EntranceService } from 'src/app/services/entrance.service';
+import { SessionService } from 'src/app/services/session.service';
 
 @Component({
   selector: 'app-listado',
@@ -44,15 +45,18 @@ export class ListadoPage implements OnInit {
   };
 
   acceso = {
-    fechaHoraEntrada: '',
+    horaEntrada: '',
     dni: '',
     sexo: '',
     conflictivo: '',
-    clientKey: ''
+    clientKey: '',
+    sessionKey: ''
 
   };
 
   message = '';
+
+  skey = '';
 
   fecha: Date = new Date();
 
@@ -65,7 +69,8 @@ export class ListadoPage implements OnInit {
     private dataService: DataService,
     private alertCtrl: AlertController,
     private modalCtrl: ModalController,
-    private entranceService: EntranceService
+    private entranceService: EntranceService,
+    private sessionService: SessionService
   ) {
     // this.clients = this.dataService.getClients();
   }
@@ -111,11 +116,6 @@ export class ListadoPage implements OnInit {
     this.ionList.closeSlidingItems();
   }
 
-  // delete(client: any) {
-  //   this.presentAlert();
-  //   console.log('delete', client.nombre);
-  //   this.ionList.closeSlidingItems();
-  // }
 
   deleteClient(key) {
       console.log(key);
@@ -214,13 +214,16 @@ export class ListadoPage implements OnInit {
   }
 
   registrarAcceso(client, id) {
+    this.skey= this.sessionService.getLastSession();
+    console.log(this.skey);
     console.log(id);
     this.acceso = {
-      fechaHoraEntrada: this.fecha.toISOString(),
+      horaEntrada: this.fecha.toISOString(),
       dni: client.dni,
       conflictivo: client.conflictivo,
       sexo: client.sexo,
-      clientKey: id
+      clientKey: id,
+      sessionKey:this.skey
     };
     console.log(this.acceso);
     this.entranceService.createAcceso(this.acceso).then((res) => {

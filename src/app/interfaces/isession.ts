@@ -1,8 +1,10 @@
 export interface Session {
-fechaHoraInicio: string;
-usuario: string;
-//hombres: number;
-//mujeres: number;
-//locales: number;
-//extranjeros: number;
+  $key: string;
+  fechaHoraInicio: string;
+  fechaHoraFin: string;
+  usuario: string;
+  //hombres: number;
+  //mujeres: number;
+  //locales: number;
+  //extranjeros: number;
 }

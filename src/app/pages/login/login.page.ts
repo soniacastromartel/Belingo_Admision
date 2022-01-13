@@ -21,7 +21,7 @@ export class LoginPage implements OnInit {
     // emailVerified: boolean;
   };
 
-  session: Session = {
+  session = {
     fechaHoraInicio: '',
     usuario: '',
   };
