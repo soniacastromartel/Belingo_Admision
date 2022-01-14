@@ -44,19 +44,19 @@ export class ListadoPage implements OnInit {
     fechaNaci: '',
   };
 
-  acceso = {
+  acceso: Access ={
+    $key: '',
     horaEntrada: '',
     dni: '',
     sexo: '',
     conflictivo: '',
     clientKey: '',
-    sessionKey: ''
-
+    sessionKey:''
   };
 
   message = '';
 
-  skey = '';
+  skey: string;
 
   fecha: Date = new Date();
 
@@ -110,20 +110,20 @@ export class ListadoPage implements OnInit {
     console.log(this.textoBuscar);
   }
 
-  updateClient(id, client) {
+  updateClient(id: string, client: IClient) {
     this.dataService.updateClient(id, client);
     console.log('actualizado!');
     this.ionList.closeSlidingItems();
   }
 
 
-  deleteClient(key) {
+  deleteClient(key: string) {
       console.log(key);
       this.dataService.deleteClient(key);
       console.log('borrado');
   }
 
-  async presentAlert(key) {
+  async presentAlert(key: string) {
     const alert = await this.alertCtrl.create({
       backdropDismiss: false,
       header: 'Atención',
@@ -213,28 +213,35 @@ export class ListadoPage implements OnInit {
 
   }
 
-  registrarAcceso(client, id) {
-    this.skey= this.sessionService.getLastSession();
+   registrarAcceso(client, id) {
+    const key=  this.sessionService.getKey().then(res => {
+      console.log(res);
+      console.log(key);
+
+      this.acceso = {
+        horaEntrada: this.fecha.toISOString(),
+        dni: client.dni,
+        conflictivo: client.conflictivo,
+        sexo: client.sexo,
+        clientKey: id,
+        sessionKey:key
+      };
+      console.log(this.acceso);
+      this.entranceService.createAcceso(this.acceso).then((result) => {
+        this.presentAccessAlert(client.nombre, client.apellido1);
+
+        console.log(result.key);
+        console.log('registrado acceso');
+        // this.modalCtrl.dismiss();
+
+      })
+      .catch((error) => console.log(error));
+
+
+    });
     console.log(this.skey);
     console.log(id);
-    this.acceso = {
-      horaEntrada: this.fecha.toISOString(),
-      dni: client.dni,
-      conflictivo: client.conflictivo,
-      sexo: client.sexo,
-      clientKey: id,
-      sessionKey:this.skey
-    };
-    console.log(this.acceso);
-    this.entranceService.createAcceso(this.acceso).then((res) => {
-      this.presentAccessAlert(client.nombre, client.apellido1);
 
-      console.log(res.key);
-      console.log('registrado acceso');
-      // this.modalCtrl.dismiss();
-
-    })
-    .catch((error) => console.log(error));
 
   }
 }

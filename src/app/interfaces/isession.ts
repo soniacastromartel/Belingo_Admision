@@ -1,7 +1,7 @@
 export interface Session {
-  $key: string;
+  $key?: string;
   fechaHoraInicio: string;
-  fechaHoraFin: string;
+  fechaHoraFin?: string;
   usuario: string;
   //hombres: number;
   //mujeres: number;

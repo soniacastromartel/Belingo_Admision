@@ -9,9 +9,10 @@ import { SessionService } from 'src/app/services/session.service';
   styleUrls: ['./resumen.page.scss'],
 })
 export class ResumenPage implements OnInit {
-sesion={
+sesion: Session ={
   $key:'',
   fechaHoraInicio:'',
+  fechaHoraFin: '',
   usuario: ''
 };
 
@@ -20,6 +21,7 @@ key: '';
 
 
   constructor(private sessionService: SessionService) {
+    // this.sesion = this.sessionService.getSession();
 
    }
 
@@ -30,12 +32,12 @@ key: '';
 
   imprimirSesion(){
     console.log('OBTENER SESION');
-    const valor = this.sessionService.getLastSession();
+    const valor = this.sessionService.getKey();
     console.log(valor);
   }
 
   obtenerSesion(){
-    this.sessionService.getCurrentSession();
+    this.sessionService.getSessionById();
   }
 
 }

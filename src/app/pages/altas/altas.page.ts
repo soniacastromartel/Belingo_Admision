@@ -175,26 +175,26 @@ export class AltasPage implements OnInit {
     const actionSheet = await this.actionSheetController.create({
       header: 'Fotos',
       buttons: [
-        {
-          text: 'Aceptar',
-          role: 'selected',
-          icon: 'add',
-          handler: () => {
-            console.log(photo);
-            console.log('Ha pasado por el base64 harcodeado');
+        // {
+        //   text: 'Aceptar',
+        //   role: 'selected',
+        //   icon: 'add',
+        //   handler: () => {
+        //     console.log(photo);
+        //     console.log('Ha pasado por el base64 harcodeado');
 
-            let imageFile;
-            fetch(photo.webviewPath)
-              .then((x) => x.blob())
-              .then((data) => {
-                imageFile = new File([data], uuid.v4() + '_' + photo.filepath, {
-                  type: 'image/png',
-                });
+        //     let imageFile;
+        //     fetch(photo.webviewPath)
+        //       .then((x) => x.blob())
+        //       .then((data) => {
+        //         imageFile = new File([data], uuid.v4() + '_' + photo.filepath, {
+        //           type: 'image/png',
+        //         });
 
-                this.newImageUpload(imageFile);
-              });
-          },
-        },
+        //         this.newImageUpload(imageFile);
+        //       });
+        //   },
+        // },
         {
           text: 'Borrar',
           role: 'destructive',
