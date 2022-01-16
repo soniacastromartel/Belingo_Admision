@@ -6,6 +6,7 @@ import {
   AngularFireObject,
 } from '@angular/fire/compat/database';
 import { promise } from 'protractor';
+import { Observable } from 'rxjs';
 import { Session } from '../interfaces/isession';
 
 @Injectable({
@@ -38,15 +39,12 @@ export class SessionService {
     return this.sessions;
   }
 
-
-
   getLast() {
     return new Promise<string>((resolve) => {
       const ref = this.afd.database.ref(this.dbPath);
       ref.limitToLast(1).on('child_added', function(snapshot) {
         // obtener la ultima llave
         console.log(snapshot.val());
-        console.log(snapshot.key);
         resolve(snapshot.key);
       });
     });
@@ -54,21 +52,12 @@ export class SessionService {
 
   async getKey(): Promise<string> {
     this.key = await this.getLast();
-    console.log(this.key);
     return this.key;
   }
 
-  // this.session = this.afd.object('/sesion/' + id);
-
-  getSessionById() {
-    return new Promise<AngularFireObject<Session>>(async (resolve) => {
-      await this.getLast().then((result) => {
-        console.log(result);
-        this.session = this.afd.object('/sesion/' + result);
-        console.log(this.session);
-        resolve(this.session);
-      });
-    });
+  getSessionById(id: string) {
+  this.session= this.afd.object('/sesion/' +id);
+  return this.session;
   }
 
 
@@ -76,7 +65,6 @@ export class SessionService {
     return this.sessions.push({
       fechaHoraInicio: session.fechaHoraInicio,
       usuario: session.usuario,
-      // fechaHoraFin: session.fechaHoraFin
     });
   }
 

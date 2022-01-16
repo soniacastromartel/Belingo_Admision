@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Access } from 'src/app/interfaces/iaccess';
 import { EntranceService } from 'src/app/services/entrance.service';
+import { SessionService } from 'src/app/services/session.service';
 
 @Component({
   selector: 'app-listado-accesos',
@@ -12,9 +13,11 @@ export class ListadoAccesosPage implements OnInit {
   // eslint-disable-next-line @typescript-eslint/naming-convention
   Accesos = [];
 
-  acceso = {
+  acceso: Access ={
+    $key: '',
     fechaHoraEntrada: '',
     clientKey: '',
+    sessionKey: '',
     dni: '',
     conflictivo: '',
     sexo: '',
@@ -22,21 +25,29 @@ export class ListadoAccesosPage implements OnInit {
 
   textoBuscar = '';
 
+  size;
 
-  constructor(private entranceService: EntranceService) {
+
+  constructor(private entranceService: EntranceService,
+    private sessionService: SessionService) {
 
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.fetchAccess();
+    const key = await this.sessionService.getKey();
     const accessRes= this.entranceService.getAccesos();
     accessRes.snapshotChanges().subscribe((res) => {
       this.Accesos=[];
       res.forEach((item)=> {
-        const a= item.payload.toJSON();
-        // eslint-disable-next-line @typescript-eslint/dot-notation
-        a ['$key'] = item.key;
-        this.Accesos.push(a as Access);
+        if (key === item.payload.val().sessionKey) {
+          const a= item.payload.toJSON();
+          console.log( item.payload.val().sessionKey);
+          // eslint-disable-next-line @typescript-eslint/dot-notation
+          a ['$key'] = item.key;
+          this.Accesos.push(a as Access);
+        }
+
       });
     });
   }

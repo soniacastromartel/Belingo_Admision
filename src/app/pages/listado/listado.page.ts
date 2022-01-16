@@ -46,7 +46,7 @@ export class ListadoPage implements OnInit {
 
   acceso: Access ={
     $key: '',
-    horaEntrada: '',
+    fechaHoraEntrada: '',
     dni: '',
     sexo: '',
     conflictivo: '',
@@ -213,18 +213,18 @@ export class ListadoPage implements OnInit {
 
   }
 
-   registrarAcceso(client, id) {
-    const key=  this.sessionService.getKey().then(res => {
+   async registrarAcceso(client, id) {
+   await this.sessionService.getKey().then(res => {
       console.log(res);
-      console.log(key);
+      // console.log(key);
 
       this.acceso = {
-        horaEntrada: this.fecha.toISOString(),
+        fechaHoraEntrada: this.fecha.toISOString(),
         dni: client.dni,
         conflictivo: client.conflictivo,
         sexo: client.sexo,
         clientKey: id,
-        sessionKey:key
+        sessionKey:res
       };
       console.log(this.acceso);
       this.entranceService.createAcceso(this.acceso).then((result) => {

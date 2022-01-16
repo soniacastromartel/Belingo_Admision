@@ -17,10 +17,11 @@
   <ion-list class="bg-transparent">
 
     <ion-item  *ngFor="let a of Accesos |filtro: textoBuscar">
-      <ion-label><b>{{a.horaEntrada | date: 'shortDate'}} {{a.horaEntrada | date: 'shortTime'}}</b>
+      <ion-label><b>{{a.fechaHoraEntrada | date: 'shortTime'}} {{a.horaEntrada | date: 'shortTime'}}</b>
         <p>Cliente: {{a.dni}}</p>
         <p></p>
         <p>{{a.sexo}}</p>
+        <!-- <p>{{a.sessionKey}}</p> -->
         <p>Conflictivo: {{a.conflictivo}}</p>
       </ion-label>
     </ion-item>

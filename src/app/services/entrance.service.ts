@@ -24,7 +24,7 @@ export class EntranceService {
 
 createAcceso(acceso: any) {
   return this.accesos.push({
-    horaEntrada: acceso.horaEntrada,
+    fechaHoraEntrada: acceso.fechaHoraEntrada,
     dni: acceso.dni,
     sexo: acceso.sexo,
     conflictivo: acceso.conflictivo,

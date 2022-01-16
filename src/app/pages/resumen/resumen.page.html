@@ -22,13 +22,13 @@
 
      <ion-item lines="none">
       <ion-label><strong> Usuario</strong></ion-label>
-      <ion-label>Sonia</ion-label>
+      <ion-label>{{sesion.usuario}}</ion-label>
     </ion-item>
 
 
     <ion-item lines="none">
      <ion-label><strong> Hora Inicio</strong></ion-label>
-     <ion-label>10:00</ion-label>
+     <ion-label>{{sesion.fechaHoraInicio | date: 'shortTime'}}</ion-label>
    </ion-item>
 
    <ion-item lines="none">
@@ -45,7 +45,7 @@
 
     <ion-item lines="none">
      <ion-label><strong> Accesos</strong></ion-label>
-     <ion-label>89</ion-label>
+     <ion-label>{{size}}</ion-label>
    </ion-item>
 
 
@@ -62,12 +62,5 @@
     <ion-icon slot="start" name="print-outline"></ion-icon>
     Imprimir Sesión
   </ion-button>
-
-  <ion-button (click)="obtenerSesion()" expand="block" shape="round" color="primary">
-    <ion-icon slot="start" name="enter-outline"></ion-icon>
-    Obtener Sesión
-  </ion-button>
-
-
 
 </ion-content>
