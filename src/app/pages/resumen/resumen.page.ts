@@ -51,7 +51,6 @@ size;
       console.log(snap.payload.val());
       const a= snap.payload.val();
       this.sesion=a;
-      console.log(this.sesion);
     });
     const accessRes= this.entranceService.getAccesos();
     accessRes.snapshotChanges().subscribe((res) => {

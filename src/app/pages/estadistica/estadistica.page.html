@@ -1,5 +1,44 @@
-<app-header2 titulo="estadística"></app-header2>
+<app-header2 titulo="estadística" link="/session"></app-header2>
 
 <ion-content fullscreen class="ion-padding">
+<div class="bg-transparent">
+
+      <ion-row>
+        <ion-col size="4">
+          <ion-img src="assets/img/Belingologo.png"></ion-img>
+        </ion-col>
+        <ion-col size="8">
+          <ion-label><strong>Belingo Admisión</strong> Estadística de Accesos </ion-label>
+        </ion-col>
+      </ion-row>
+
+</div>
+
+<ion-row>
+  <ion-col size="12"></ion-col>
+</ion-row>
+<ion-row>
+  <ion-col size="12"></ion-col>
+</ion-row>
+<ion-row>
+  <ion-col size="12"></ion-col>
+</ion-row>
+<ion-row>
+  <ion-col size="12"></ion-col>
+</ion-row>
+
+<div class="chart-container">
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Accesos</ion-card-title>
+      <ion-card-subtitle>Estadística</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #doughnutCanvas></canvas>
+    </ion-card-content>
+  </ion-card>
+
+</div>
 
 </ion-content>
