@@ -229,6 +229,8 @@ export class ListadoPage implements OnInit {
       console.log(this.acceso);
       this.entranceService.createAcceso(this.acceso).then((result) => {
         this.presentAccessAlert(client.nombre, client.apellido1);
+        this.sessionService.updateSession(res);
+        console.log(res);
 
         console.log(result.key);
         console.log('registrado acceso');
@@ -239,7 +241,6 @@ export class ListadoPage implements OnInit {
 
 
     });
-    console.log(this.skey);
     console.log(id);
 
 

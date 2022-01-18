@@ -17,7 +17,8 @@ export class SessionPage implements OnInit{
     $key: '',
     fechaHoraInicio: '',
     fechaHoraFin: '',
-    usuario: ''
+    usuario: '',
+    aforo: 0
   };
 
 

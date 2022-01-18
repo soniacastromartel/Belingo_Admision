@@ -3,6 +3,7 @@ export interface Session {
   fechaHoraInicio: string;
   fechaHoraFin?: string;
   usuario: string;
+  aforo: number;
   //hombres: number;
   //mujeres: number;
   //locales: number;

@@ -1,4 +1,4 @@
-<app-header2 titulo="estadística" link="/session"></app-header2>
+<app-header2 titulo="Aforo" link="/session"></app-header2>
 
 <ion-content fullscreen class="ion-padding">
 <div class="bg-transparent">
@@ -7,8 +7,9 @@
         <ion-col size="4">
           <ion-img src="assets/img/Belingologo.png"></ion-img>
         </ion-col>
-        <ion-col size="8">
-          <ion-label><strong>Belingo Admisión</strong> Estadística de Accesos </ion-label>
+        <ion-col size="6">
+          <ion-label><strong>Belingo Admisión</strong> </ion-label>
+          <ion-label> Control de Aforo</ion-label>
         </ion-col>
       </ion-row>
 
@@ -32,7 +33,7 @@
   <ion-card>
     <ion-card-header>
       <ion-card-title>Accesos</ion-card-title>
-      <ion-card-subtitle>Estadística</ion-card-subtitle>
+      <ion-card-subtitle>Aforo total: 200  </ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
       <canvas #doughnutCanvas></canvas>
@@ -40,5 +41,9 @@
   </ion-card>
 
 </div>
+
+<ion-button (click)="onClick()" expand="block"  shape="round">
+  Obtener Aforo
+</ion-button>
 
 </ion-content>

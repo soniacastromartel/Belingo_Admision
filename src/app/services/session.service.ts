@@ -13,20 +13,21 @@ import { Session } from '../interfaces/isession';
   providedIn: 'root',
 })
 export class SessionService {
+
   key: string;
-  // horaInicio: '';
-  // horaFin: '';
-  // usuario: '';
 
   sesion: Session = {
     $key: '',
     fechaHoraInicio: '',
     fechaHoraFin: '',
     usuario: '',
+    aforo: 200
   };
 
+
+
   sessions: AngularFireList<any>;
-  session: AngularFireObject<any>;
+  session: AngularFireObject<Session>;
 
   dbPath = '/sesion';
 
@@ -65,6 +66,7 @@ export class SessionService {
     return this.sessions.push({
       fechaHoraInicio: session.fechaHoraInicio,
       usuario: session.usuario,
+      aforo: session.aforo
     });
   }
 
@@ -72,4 +74,12 @@ export class SessionService {
     this.session = this.afd.object('/sesion/' + id);
     this.session.remove();
   }
+
+  updateSession(id: string){
+    this.session= this.afd.object('/sesion/' + id);
+   return this.session.update({
+     aforo: this.sesion.aforo --
+    });
+  }
+
 }

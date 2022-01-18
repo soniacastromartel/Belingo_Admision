@@ -24,6 +24,7 @@ export class LoginPage implements OnInit {
   session = {
     fechaHoraInicio: '',
     usuario: '',
+    aforo: 200
   };
 
   fecha: Date = new Date();
@@ -48,7 +49,8 @@ export class LoginPage implements OnInit {
 
 this.session ={
   fechaHoraInicio:this.fecha.toISOString(),
-  usuario: email
+  usuario: email,
+  aforo: 200
 };
 
     this.authService

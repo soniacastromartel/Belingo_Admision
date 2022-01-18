@@ -15,7 +15,8 @@ sesion: Session ={
   $key:'',
   fechaHoraInicio:'',
   fechaHoraFin: '',
-  usuario: ''
+  usuario: '',
+  aforo:0
 };
 
 currentSession: Session;
