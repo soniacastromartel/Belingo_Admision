@@ -40,19 +40,24 @@
 
   <ion-item-group class="bg-transparent" >
     <ion-item-divider color="none" >
-      <ion-label>Accesos</ion-label>
+      <ion-label>Control de Aforo</ion-label>
     </ion-item-divider>
 
-    <ion-item lines="none">
-     <ion-label><strong> Accesos</strong></ion-label>
-     <ion-label>{{size}}</ion-label>
-   </ion-item>
-
-
    <ion-item lines="none">
-    <ion-label><strong> Incidencias</strong></ion-label>
-    <ion-label>1</ion-label>
+    <ion-label><strong> Aforo</strong></ion-label>
+    <ion-label>{{sesion.aforo}}</ion-label>
   </ion-item>
+
+  <ion-item lines="none">
+    <ion-label><strong> Accesos</strong></ion-label>
+    <ion-label>{{size}}</ion-label>
+  </ion-item>
+
+
+  <!-- <ion-item lines="none">
+    <ion-label><strong> Restantes</strong></ion-label>
+    <ion-label>{{remainingCapacity}}</ion-label>
+  </ion-item> -->
 
  </ion-item-group>
 

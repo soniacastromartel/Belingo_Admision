@@ -12,17 +12,14 @@
       </ion-col>
     </ion-row>
 
-    <form #formulario="ngForm" (ngSubmit)="onSubmit(formulario)">
+    <form  (ngSubmit)="onSubmit()" [formGroup]="loginForm">
       <ion-row>
         <ion-col>
 
           <ion-list class="bg-none">
 
             <ion-item color="none" lines="none">
-              <ion-input name="email" placeholder="Email" type="email"
-              pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
-              required
-              [(ngModel)]="usuario.email"></ion-input>
+              <ion-input formControlName="email" placeholder="Email" type="email"></ion-input>
               <ion-icon name="mail-outline" slot="start"></ion-icon>
             </ion-item>
 
@@ -31,8 +28,8 @@
           <ion-list class="bg-none">
 
             <ion-item color="none" lines="none">
-              <ion-input name="password" type="password" placeholder="Password" required
-              [(ngModel)]="usuario.password"></ion-input>
+              <ion-input formControlName="password" type="password" placeholder="Password" >
+              </ion-input>
               <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
             </ion-item>
 
@@ -44,9 +41,8 @@
       <ion-row>
         <ion-col>
 
-          <ion-button [disabled]="formulario.invalid"
-          type="submit" shape="round" expand="block" color="primary">
-            <ion-icon slot="start"    name="arrow-forward-circle-outline"></ion-icon> LOGIN
+          <ion-button type="submit" shape="round" [disabled]="loginForm.invalid"  expand="block" color="primary">
+            <ion-icon slot="start" name="arrow-forward-circle-outline"></ion-icon> LOGIN
           </ion-button>
 
         </ion-col>

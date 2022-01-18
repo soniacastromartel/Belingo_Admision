@@ -70,7 +70,7 @@ export class AltasPage implements OnInit {
     public fireStorageService: FireStorageService
   ) {}
 
-  async ngOnInit() {
+   ngOnInit() {
     // await this.fireStorageService.loadSaved();
     this.clientForm = this.fb.group({
       nombre: [''],

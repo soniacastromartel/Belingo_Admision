@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 import { Session } from 'src/app/interfaces/isession';
 import { User } from 'src/app/interfaces/iuser';
 import { AuthenticationService } from 'src/app/services/authentication.service';
@@ -12,6 +13,9 @@ import { SessionService } from 'src/app/services/session.service';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+
+  loginForm: FormGroup;
+
   usuario: User = {
     uid: '',
     email: '',
@@ -32,17 +36,32 @@ export class LoginPage implements OnInit {
   constructor(
     private authService: AuthenticationService,
     private router: Router,
-    private sessionService: SessionService
+    private fb: FormBuilder,
+    private sessionService: SessionService,
+    private alertCtrl: AlertController
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.loginForm = this.fb.group({
+      email: ['', [
+        Validators.required,
+        Validators.email
+      ]],
+      password: ['', [
+        Validators.required,
+      ]]
+    });
+  }
 
-  onSubmit(formulario: NgForm) {
-    this.usuario.email = formulario.value.email;
-    this.usuario.password = formulario.value.password;
-    this.login(this.usuario.email, this.usuario.password);
-    console.log('submit');
-    console.log(this.usuario);
+  onSubmit() {
+    if (this.loginForm.valid) {
+      this.usuario.email = this.loginForm.value.email;
+      this.usuario.password = this.loginForm.value.password;
+      this.login(this.usuario.email, this.usuario.password);
+      console.log('submit');
+      console.log(this.usuario);
+    }
+
   }
 
   login(email: string, password: string) {
@@ -64,6 +83,27 @@ this.session ={
         .catch((error) => console.log(error));
         this.router.navigate(['/home']);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        this.presentAlert();
+        console.log(error);
+        });
+  }
+
+  async presentAlert() {
+    const alert = await this.alertCtrl.create({
+      backdropDismiss: false,
+      header: 'Login',
+      subHeader: 'El email o el password son incorrectos',
+      buttons: [
+        {
+          text: 'Aceptar',
+          role: 'cancel',
+          handler: () => {
+          },
+        },
+      ],
+    });
+
+    await alert.present();
   }
 }

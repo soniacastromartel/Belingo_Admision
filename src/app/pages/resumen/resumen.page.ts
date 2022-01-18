@@ -35,12 +35,18 @@ acceso: Access ={
   sexo: '',
 };
 
-size;
+size =0;
+
+remainingCapacity;
+
+
 
 
 
   constructor(private sessionService: SessionService, private entranceService: EntranceService) {
     // this.sesion = this.sessionService.getSession();
+
+
 
    }
 
@@ -78,6 +84,18 @@ size;
     //   console.log(x.query);
     // });
     // console.log(valor);
+  }
+
+  getRemainingCapacity(){
+    console.log(this.size);
+    console.log(this.sesion.aforo);
+    if (this.size===0){
+      this.remainingCapacity= 200;
+    }else{
+      this.remainingCapacity= this.sesion.aforo -this.size;
+    }
+    console.log(this.remainingCapacity);
+    return this.remainingCapacity;
   }
 
 
