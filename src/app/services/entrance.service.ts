@@ -1,5 +1,7 @@
+/* eslint-disable prefer-arrow/prefer-arrow-functions */
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/compat/database';
+import  firebase from 'firebase/compat';
 import { Access } from '../interfaces/iaccess';
 
 @Injectable({
@@ -23,6 +25,13 @@ export class EntranceService {
   }
 
 createAcceso(acceso: any) {
+ this.afd.database.ref('accesos').orderByChild('dni').equalTo(acceso.dni).on('child_added', function(data) {
+    console.log(data.exists()? 'exixste': 'no existe');
+  }, function(error) {
+    console.log(error);
+  });;
+
+
   return this.accesos.push({
     fechaHoraEntrada: acceso.fechaHoraEntrada,
     dni: acceso.dni,

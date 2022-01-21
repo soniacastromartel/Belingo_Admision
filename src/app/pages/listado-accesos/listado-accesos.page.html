@@ -1,16 +1,18 @@
-<ion-header class="ion-no-border">
-  <ion-toolbar>
+<ion-header #header class="ion-no-border">
+  <ion-toolbar #toolbar>
     <ion-buttons slot="start">
       <ion-back-button color="white" defaultHref="/session">
       </ion-back-button>
     </ion-buttons>
-    <ion-title class="uname">Listado de Accesos</ion-title>
+    <ion-title class="uname">Accesos</ion-title>
     <img slot="end" src="/assets/img/Belingologo.png" width="25px" style="display:inline-block" height="25px" />
   </ion-toolbar>
-  <ion-searchbar placeholder="Buscar" inputmode="text" (ionChange)="onSearchChange($event)" [debounce]="250">
+  <ion-searchbar placeholder="Buscar Acceso" inputmode="text" (ionChange)="onSearchChange($event)" [debounce]="250">
   </ion-searchbar>
 </ion-header>
-<ion-content fullscreen class="ion-padding">
+
+<ion-content scrollEvents="true" [appHideHeader]="header" [fullscreen]="true" class="ion-padding">
+
   <ion-label>
     <strong><u>Accesos</u></strong>
     </ion-label>
@@ -26,7 +28,7 @@
       </ion-label>
     </ion-item>
   </ion-list>
-<!-- 
+<!--
   <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
     <ion-infinite-scroll-content
       loadingSpinner="crescent"

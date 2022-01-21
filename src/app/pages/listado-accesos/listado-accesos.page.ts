@@ -57,7 +57,7 @@ export class ListadoAccesosPage implements OnInit {
       .getAccesos()
       .valueChanges()
       .subscribe((res) => {
-        console.log(res);
+        // console.log(res);
       });
   }
 

@@ -10,6 +10,7 @@ import { ListadoPage } from './listado.page';
 import { ComponentsModule } from 'src/app/components/components.module';
 
 import { PipesModule } from 'src/app/pipes/pipes.module';
+import { SharedDirectivesModule } from 'src/app/directives/shared-directives.module';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { PipesModule } from 'src/app/pipes/pipes.module';
     IonicModule,
     ListadoPageRoutingModule,
     ComponentsModule,
-    PipesModule
+    PipesModule,
+    SharedDirectivesModule,
   ],
   declarations: [ListadoPage],
 })

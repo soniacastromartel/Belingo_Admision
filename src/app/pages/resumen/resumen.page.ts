@@ -16,7 +16,7 @@ sesion: Session ={
   fechaHoraInicio:'',
   fechaHoraFin: '',
   usuario: '',
-  aforo:0
+  aforo: 200
 };
 
 currentSession: Session;
@@ -84,6 +84,7 @@ remainingCapacity;
     //   console.log(x.query);
     // });
     // console.log(valor);
+    this.getRemainingCapacity();
   }
 
   getRemainingCapacity(){

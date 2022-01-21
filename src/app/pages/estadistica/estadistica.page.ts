@@ -14,7 +14,11 @@ import { EntranceService } from 'src/app/services/entrance.service';
 import { SessionService } from 'src/app/services/session.service';
 Chart.register(...registerables);
 
-import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/compat/database';
+import {
+  AngularFireDatabase,
+  AngularFireList,
+  AngularFireObject,
+} from '@angular/fire/compat/database';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -31,14 +35,14 @@ export class EstadisticaPage implements AfterViewInit {
   // ctx = document.getElementById('canvas');
 
   data: Observable<any>;
-ref: AngularFireList<any>;
+  ref: AngularFireList<any>;
 
   aforo;
 
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  Accesos= [];
+  Accesos = [];
 
-  acceso: Access ={
+  acceso: Access = {
     $key: '',
     fechaHoraEntrada: '',
     clientKey: '',
@@ -48,65 +52,59 @@ ref: AngularFireList<any>;
     sexo: '',
   };
 
-  sesion: Session ={
-    $key:'',
-    fechaHoraInicio:'',
+  sesion: Session = {
+    $key: '',
+    fechaHoraInicio: '',
     fechaHoraFin: '',
     usuario: '',
-    aforo:0
+    aforo: 0,
   };
 
   size;
 
-  chartData= null;
+  chartData = null;
 
-  constructor(private sessionService: SessionService, private entranceService: EntranceService,
-    private db: AngularFireDatabase) {}
+  constructor(
+    private sessionService: SessionService,
+    private entranceService: EntranceService,
+    private db: AngularFireDatabase
+  ) {
 
- async ngAfterViewInit() {
-   console.log(this.onClick());
+  }
 
-  const key = await this.sessionService.getKey();
-  const session = this.sessionService.getSessionById(key);
-  session.snapshotChanges().subscribe((snap) => {
-    console.log(snap.key);
-    console.log(snap.payload.val());
-    const a= snap.payload.val();
-    this.sesion=a;
-    console.log(this.sesion.aforo);
-    return this.sesion.aforo;
-  });
-  const accessRes= this.entranceService.getAccesos();
-  accessRes.snapshotChanges().subscribe((res) => {
-    this.Accesos=[];
-    res.forEach((item)=> {
-      if (key === item.payload.val().sessionKey) {
-        const a= item.payload.toJSON();
-        console.log( item.payload.val().sessionKey);
-        // eslint-disable-next-line @typescript-eslint/dot-notation
-        a ['$key'] = item.key;
-        this.Accesos.push(a as Access);
-        this.size= this.Accesos.length;
+  async ngAfterViewInit() {
 
-      }
+    await this.sessionService.getAforo().then(async (data) => {
+      this.aforo= data;
+       await this.sessionService.getLast().then((response) => {
+         console.log(response);
+         this.entranceService.getAccesos().snapshotChanges().subscribe((res)=>{
+          this.Accesos=[];
+          res.forEach((item)=> {
+            if (response === item.payload.val().sessionKey) {
+              const a= item.payload.toJSON();
+              console.log( item.payload.val().sessionKey);
+              // eslint-disable-next-line @typescript-eslint/dot-notation
+              a ['$key'] = item.key;
+              this.Accesos.push(a as Access);
+              this.size= this.Accesos.length;
+
+            }
+
+          });
+          console.log(this.aforo);
+          console.log(this.size);
+          this.doughnutChartMethod(this.size,this.aforo);
+
+
+         });
+       });
     });
-    console.log(this.size);
-  });
-  console.log(this.size);
-  console.log(this.sesion.aforo);
 
-this.doughnutChartMethod();
+  }
 
-}
-
-
-
-
-  doughnutChartMethod() {
-
-const tamanio = this.Accesos.length;
-console.log(tamanio);
-
+  doughnutChartMethod(size,aforo) {
+    console.log(aforo);
 
     this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
       type: 'doughnut',
@@ -115,7 +113,7 @@ console.log(tamanio);
         datasets: [
           {
             label: 'Aforo',
-            data: [30,200],
+            data: [size, aforo],
             backgroundColor: [
               'rgba(255, 159, 64, 1)',
               'rgba(255, 99, 132, 1)',
@@ -130,38 +128,19 @@ console.log(tamanio);
               '#FFCE56',
               '#FF6384',
             ],
-            borderWidth:1,
-            borderColor: 'rgba(54, 162, 235, 1)'
+            borderWidth: 1,
+            borderColor:'#616161',
           },
         ],
       },
     });
   }
 
-
-
   async onClick() {
-
-    const key = await this.sessionService.getKey();
-  const session = this.sessionService.getSessionById(key);
-  session.snapshotChanges().subscribe((snap) => {
-    console.log(snap.key);
-    console.log(snap.payload.val());
-    this.aforo= snap.payload.val().aforo;
-    console.log(this.aforo);
-
-  });
-  }
-ionViewDidLoad() {
-
-  this.ref= this.db.list('sesion', ref => ref.orderByChild('aforo'));
-  this.ref.valueChanges().subscribe(result =>{
-    
-  })
-  if(this.chartData){
+   await this.sessionService.getAforo().then((data) => {
+     console.log(data);
+   });
 
   }
-
-}
 
 }

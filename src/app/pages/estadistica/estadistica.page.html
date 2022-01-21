@@ -1,7 +1,7 @@
 <app-header2 titulo="Aforo" link="/session"></app-header2>
 
 <ion-content fullscreen class="ion-padding">
-<div class="bg-transparent">
+<div class>
 
       <ion-row>
         <ion-col size="4">
@@ -30,7 +30,7 @@
 
 <div class="chart-container">
 
-  <ion-card>
+  <ion-card class="card">
     <ion-card-header>
       <ion-card-title>Accesos</ion-card-title>
       <ion-card-subtitle>Aforo total: 200  </ion-card-subtitle>
@@ -42,8 +42,12 @@
 
 </div>
 
-<ion-button (click)="onClick()" expand="block"  shape="round">
+<div>
+  <ion-label>Restantes: {{aforo}} </ion-label>
+</div>
+
+<!-- <ion-button (click)="onClick()" expand="block"  shape="round">
   Obtener Aforo
-</ion-button>
+</ion-button> -->
 
 </ion-content>

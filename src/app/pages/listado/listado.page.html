@@ -1,5 +1,5 @@
-<ion-header class="ion-no-border">
-  <ion-toolbar>
+<ion-header #header class="ion-no-border">
+  <ion-toolbar #toolbar>
     <ion-buttons slot="start">
       <ion-back-button color="white" defaultHref="/clients">
       </ion-back-button>
@@ -11,7 +11,8 @@
   </ion-searchbar>
 </ion-header>
 
-<ion-content fullscreen class="ion-padding">
+<ion-content scrollEvents="true" [appHideHeader]="header" [fullscreen]="true" class="ion-padding"
+>
   <div id="container">
 
 

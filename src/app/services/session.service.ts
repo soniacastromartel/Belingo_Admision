@@ -51,6 +51,18 @@ export class SessionService {
     });
   }
 
+  getAforo(){
+    return new Promise<any>((resolve) => {
+      const ref = this.afd.database.ref(this.dbPath);
+      ref.limitToLast(1).on('child_added', function(snapshot) {
+        // obtener la ultima llave
+        console.log(snapshot.val().aforo);
+        resolve(snapshot.val().aforo);
+      });
+    });
+
+  }
+
   async getKey(): Promise<string> {
     this.key = await this.getLast();
     return this.key;
