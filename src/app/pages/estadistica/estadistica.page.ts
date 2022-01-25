@@ -53,7 +53,7 @@ export class EstadisticaPage implements AfterViewInit {
   };
 
   sesion: Session = {
-    $key: '',
+  key: '',
     fechaHoraInicio: '',
     fechaHoraFin: '',
     usuario: '',

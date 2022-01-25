@@ -43,7 +43,19 @@ async getUid() {
   if (user === null) {
     return null;
   } else {
+    console.log(user.uid);
     return user.uid;
+  }
+}
+
+
+async getUser() {
+  const user = await this.auth.currentUser;
+  console.log(user);
+  if (user === null) {
+    return null;
+  } else {
+    return user;
   }
 }
 

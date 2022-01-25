@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Session } from 'src/app/interfaces/isession';
 import { User } from 'src/app/interfaces/iuser';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { SessionService } from 'src/app/services/session.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -13,23 +14,27 @@ import { SessionService } from 'src/app/services/session.service';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-
+  user;
   loginForm: FormGroup;
 
   usuario: User = {
+    key: '',
     uid: '',
     email: '',
     password: '',
     nombre: '',
-    photoURL: '',
+    isAdmin: false,
     // emailVerified: boolean;
   };
 
   session = {
+    key: '',
     fechaHoraInicio: '',
     usuario: '',
-    aforo: 200
+    aforo: 200,
   };
+
+  sessionKey;
 
   fecha: Date = new Date();
 
@@ -38,18 +43,14 @@ export class LoginPage implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private sessionService: SessionService,
+    private userService: UserService,
     private alertCtrl: AlertController
   ) {}
 
   ngOnInit() {
     this.loginForm = this.fb.group({
-      email: ['', [
-        Validators.required,
-        Validators.email
-      ]],
-      password: ['', [
-        Validators.required,
-      ]]
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]],
     });
   }
 
@@ -57,36 +58,83 @@ export class LoginPage implements OnInit {
     if (this.loginForm.valid) {
       this.usuario.email = this.loginForm.value.email;
       this.usuario.password = this.loginForm.value.password;
-      this.login(this.usuario.email, this.usuario.password);
+      this.login(this.usuario);
       console.log('submit');
       console.log(this.usuario);
     }
-
   }
 
-  login(email: string, password: string) {
+  async login(usuario: User) {
+    console.log(this.user);
 
-this.session ={
-  fechaHoraInicio:this.fecha.toISOString(),
-  usuario: email,
-  aforo: 200
-};
+    this.session = {
+      key: this.sessionKey,
+      fechaHoraInicio: this.fecha.toISOString(),
+      usuario: usuario.email,
+      aforo: 200,
+    };
 
-    this.authService
-      .login(email, password)
-      .then(() => {
-        this.sessionService.createSession(this.session).then((res) => {
-          console.log(res.key);
-          console.log('sesion iniciada');
-
-        })
-        .catch((error) => console.log(error));
-        this.router.navigate(['/home']);
+    this.sessionService
+      .createSession(this.session)
+      .then((res) => {
+        console.log(res.key);
+        this.sessionKey = res.key;
+        console.log('sesion iniciada');
       })
-      .catch((error) => {
-        this.presentAlert();
-        console.log(error);
-        });
+      .catch((error) => console.log(error));
+
+    await this.authService
+      .login(usuario.email, usuario.password)
+      .then(async () => {
+        await this.authService
+          .getUid()
+          .then((uid) => {
+            this.userService
+              .getUserById(uid)
+              .snapshotChanges()
+              .subscribe((snap) => {
+                console.log(snap.key);
+                console.log(snap.payload.val());
+                const a = snap.payload.val();
+                this.user = a;
+
+                const objToSend: NavigationExtras = {
+                  queryParams: {
+                    isAdmin: this.user.isAdmin,
+                    key: this.sessionKey,
+                  },
+                };
+
+                this.router.navigate(['/home'], {
+                  state: { isAdmin: objToSend },
+                });
+
+              });
+            // console.log(this.user);
+            // console.log(uid);
+
+
+          })
+          .catch((error) => {
+            this.presentAlert();
+            console.log(error);
+          });
+
+        //   this.sessionService
+        //     .createSession(this.session)
+        //     .then((res) => {
+        //       console.log(res.key);
+        //       console.log('sesion iniciada');
+        //     })
+        //     .catch((error) => console.log(error));
+        //   this.router.navigate(['/home'], {
+        //     state: {isAdmin: objToSend}
+        //   });
+        // })
+        // .catch((error) => {
+        //   this.presentAlert();
+        //   console.log(error);
+      });
   }
 
   async presentAlert() {
@@ -98,8 +146,7 @@ this.session ={
         {
           text: 'Aceptar',
           role: 'cancel',
-          handler: () => {
-          },
+          handler: () => {},
         },
       ],
     });

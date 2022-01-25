@@ -13,7 +13,7 @@ export class HideHeaderDirective implements OnInit {
   constructor(private renderer: Renderer2, private domCtrl: DomController) {}
 
   ngOnInit() {
-    console.log('test: ', this.toolbar);
+    // console.log('test: ', this.toolbar);
 
     this.toolbar = this.toolbar.el;
 
@@ -23,11 +23,12 @@ export class HideHeaderDirective implements OnInit {
   }
 
 @HostListener('ionScroll', ['$event']) onContentScroll($event) {
+
   const scrollTop= $event.detail.scrollTop;
 // eslint-disable-next-line prefer-const
-let newPosition = (scrollTop/ 5);
-console.log(scrollTop/5);
-console.log(this.toolbarHeight);
+// let newPosition = (scrollTop/ 5);
+// console.log(scrollTop/5);
+// console.log(this.toolbarHeight);
 
   // if(newPosition < this.toolbarHeight){
   //   newPosition = -this.toolbarHeight;
@@ -51,7 +52,7 @@ console.log(this.toolbarHeight);
 
 
 
-  console.log(scrollTop);
+  // console.log(scrollTop);
 }
 
 }

@@ -1,5 +1,5 @@
 export interface Session {
-  $key?: string;
+  key?: string;
   fechaHoraInicio: string;
   fechaHoraFin?: string;
   usuario: string;

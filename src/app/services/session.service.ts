@@ -13,26 +13,25 @@ import { Session } from '../interfaces/isession';
   providedIn: 'root',
 })
 export class SessionService {
-
   key: string;
 
   sesion: Session = {
-    $key: '',
+    key: '',
     fechaHoraInicio: '',
     fechaHoraFin: '',
     usuario: '',
-    aforo: 200
+    aforo: 200,
   };
-
-
 
   sessions: AngularFireList<any>;
   session: AngularFireObject<Session>;
 
   dbPath = '/sesion';
+  ref;
 
   constructor(private afd: AngularFireDatabase) {
     this.sessions = this.afd.list(this.dbPath);
+    this.ref = this.afd.database.ref(this.dbPath);
   }
 
   getSessions(): AngularFireList<any> {
@@ -51,7 +50,7 @@ export class SessionService {
     });
   }
 
-  getAforo(){
+  getAforo() {
     return new Promise<any>((resolve) => {
       const ref = this.afd.database.ref(this.dbPath);
       ref.limitToLast(1).on('child_added', function(snapshot) {
@@ -60,7 +59,6 @@ export class SessionService {
         resolve(snapshot.val().aforo);
       });
     });
-
   }
 
   async getKey(): Promise<string> {
@@ -69,16 +67,15 @@ export class SessionService {
   }
 
   getSessionById(id: string) {
-  this.session= this.afd.object('/sesion/' +id);
-  return this.session;
+    this.session = this.afd.object('/sesion/' + id);
+    return this.session;
   }
-
 
   createSession(session: any) {
     return this.sessions.push({
       fechaHoraInicio: session.fechaHoraInicio,
       usuario: session.usuario,
-      aforo: session.aforo
+      aforo: session.aforo,
     });
   }
 
@@ -87,11 +84,19 @@ export class SessionService {
     this.session.remove();
   }
 
-  updateSession(id: string){
-    this.session= this.afd.object('/sesion/' + id);
-   return this.session.update({
-     aforo: this.sesion.aforo --
+  updateSession(id: string) {
+    this.session = this.afd.object('/sesion/' + id);
+    return this.session.update({
+      aforo: this.sesion.aforo--,
     });
   }
 
+  updateSessionEnd(id: string, end: string) {
+    this.session= this.afd.object('/sesion/' + id);
+    return this.session.update({
+      fechaHoraFin: end
+     });
+
+
+  }
 }

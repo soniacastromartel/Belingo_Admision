@@ -12,7 +12,7 @@ import { SessionService } from 'src/app/services/session.service';
 })
 export class ResumenPage implements OnInit {
 sesion: Session ={
-  $key:'',
+  key:'',
   fechaHoraInicio:'',
   fechaHoraFin: '',
   usuario: '',

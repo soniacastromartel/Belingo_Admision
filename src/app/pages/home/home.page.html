@@ -16,15 +16,35 @@
 
   <ion-grid fixed>
 
-        <ion-button  class=""routerLink="/clients" color="primary"  expand="block" shape="round">
-         <ion-icon slot="start" name="people-outline"></ion-icon>
-          Clientes
-        </ion-button>
+    <ion-button class="" routerLink="/clients" color="primary" expand="block" shape="round">
+      <ion-icon slot="start" name="people-outline"></ion-icon>
+      Clientes
+    </ion-button>
 
-        <ion-button routerLink="/session" color="primary"  expand="block" shape="round">
-          <ion-icon slot="start" name="stats-chart-outline"></ion-icon>
-          Sesión
-        </ion-button>
+    <ion-button routerLink="/session" color="primary" expand="block" shape="round">
+      <ion-icon slot="start" name="stats-chart-outline"></ion-icon>
+      Sesión
+    </ion-button>
+
+
+
+    <div *ngIf="isAdmin">
+      <p>{{isAdmin}}</p>
+    </div>
+
+    <div [hidden]="!isAdmin">
+      <ion-button routerLink="/create-user" color="warning" expand="block" shape="round">
+        <ion-icon slot="start" name="build-outline"></ion-icon>
+        Administración
+      </ion-button>
+    </div>
+
+
+    <ion-button (click)="onClick()" expand="block" color="danger" shape="round">
+      <ion-icon slot="start" name="power-outline"></ion-icon>
+      Cerrar Sesión
+    </ion-button>
+
 
 
 
