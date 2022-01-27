@@ -98,15 +98,15 @@ export class LoginPage implements OnInit {
                 const a = snap.payload.val();
                 this.user = a;
 
-                const objToSend: NavigationExtras = {
-                  queryParams: {
-                    isAdmin: this.user.isAdmin,
-                    key: this.sessionKey,
-                  },
-                };
+                // const objToSend: NavigationExtras = {
+                //   queryParams: {
+                //     isAdmin: this.user.isAdmin,
+                //     key: this.sessionKey,
+                //   },
+                // };
 
                 this.router.navigate(['/home'], {
-                  state: { isAdmin: objToSend },
+                  // state: { isAdmin: objToSend },
                 });
 
               });

@@ -28,12 +28,12 @@
 
 
 
-    <div *ngIf="isAdmin">
+    <!-- <div *ngIf="isAdmin">
       <p>{{isAdmin}}</p>
-    </div>
+    </div> -->
 
     <div [hidden]="!isAdmin">
-      <ion-button routerLink="/create-user" color="warning" expand="block" shape="round">
+      <ion-button routerLink="/management" color="warning" expand="block" shape="round">
         <ion-icon slot="start" name="build-outline"></ion-icon>
         Administración
       </ion-button>

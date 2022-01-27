@@ -96,7 +96,6 @@ export class EstadisticaPage implements AfterViewInit {
           console.log(this.size);
           this.doughnutChartMethod(this.size,this.aforo);
 
-
          });
        });
     });

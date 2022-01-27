@@ -13,7 +13,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class HomePage implements OnInit {
   // eslint-disable-next-line @typescript-eslint/no-inferrable-types
-  isAdmin: boolean = false;
+  isAdmin;
   data;
 
   pelele=true;
@@ -44,16 +44,14 @@ export class HomePage implements OnInit {
     private sessionService: SessionService,
     private userService: UserService
   ) {
-    this.isAdmin =
-      this.router.getCurrentNavigation().extras.state.isAdmin.queryParams.isAdmin;
-    this.data =
-      this.router.getCurrentNavigation().extras.state.isAdmin.queryParams;
-    console.log(this.isAdmin);
-    console.log(this.data);
+    // this.isAdmin = this.getAdmin();
+    // console.log(this.isAdmin);
+    // this.data =
+    //   this.router.getCurrentNavigation().extras.state.isAdmin.queryParams;
+    // console.log(this.data);
   }
 
   async ngOnInit() {
-    console.log(this.isAdmin);
     const key = await this.sessionService.getKey();
     const session = this.sessionService.getSessionById(key);
     session.snapshotChanges().subscribe((snap) => {
@@ -65,17 +63,8 @@ export class HomePage implements OnInit {
       console.log(this.sesion.key);
     });
 
-    // await this.authService.getUid().then(async (uid) => {
-    //   console.log(uid);
-    //   this.userService
-    //     .getUserById(uid)
-    //     .snapshotChanges()
-    //     .subscribe((res) => {
-    //       console.log(res.payload.val());
-    //       this.isAdmin = res.payload.val().isAdmin;
-    //       console.log(this.isAdmin);
-    //     });
-    // });
+    this.isAdmin= await this.getAdmin();
+    console.log(this.isAdmin);
   }
 
   async onClick() {
@@ -89,4 +78,30 @@ export class HomePage implements OnInit {
         console.log('sesión cerrada');
       });
   }
+
+
+  getIsAdmin() {
+    return new Promise<boolean>(async (resolve) => {
+      await this.authService.getUid().then(async (uid) => {
+        console.log(uid);
+        this.userService
+          .getUserById(uid)
+          .snapshotChanges()
+          .subscribe((res) => {
+            console.log(res.payload.val());
+            this.isAdmin = res.payload.val().isAdmin;
+            resolve(this.isAdmin);
+            console.log(this.isAdmin);
+          });
+      });
+    });
+  }
+
+  async getAdmin(): Promise<boolean> {
+    this.isAdmin = await this.getIsAdmin();
+    console.log(this.isAdmin);
+    return this.isAdmin;
+  }
+
+
 }

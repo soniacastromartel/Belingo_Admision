@@ -56,6 +56,10 @@ const routes: Routes = [
     path: 'create-user',
     loadChildren: () => import('./pages/create-user/create-user.module').then( m => m.CreateUserPageModule)
   },
+  {
+    path: 'management',
+    loadChildren: () => import('./pages/management/management.module').then( m => m.ManagementPageModule)
+  },
 ];
 
 @NgModule({

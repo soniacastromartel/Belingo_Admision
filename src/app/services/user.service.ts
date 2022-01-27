@@ -33,9 +33,7 @@ export class UserService {
   }
 
   createUser(user: User) {
-    // console.log(user);
-    // console.log(user.uid);
-    // console.log(this.ref);
+    // No se puede hacer un push ya que se generaría un key automático y queremos que el key sea el uid
    return this.ref.child(user.uid).set(user);
   }
 
@@ -56,4 +54,6 @@ export class UserService {
       uid: user.uid
     });
   }
+
+
 }

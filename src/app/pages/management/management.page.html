@@ -1,0 +1,16 @@
+<app-header titulo="Administración"></app-header>
+
+
+<ion-content fullscreen class="ion-padding">
+
+  <ion-button routerLink="/create-user" expand="block" color="primary" shape="round">
+    <ion-icon slot="start" name="person-add-outline"></ion-icon>
+    Alta Empleado
+  </ion-button>
+
+  <ion-button (click)="onClick()" expand="block" color="danger" shape="round">
+    <ion-icon slot="start" name="power-outline"></ion-icon>
+    Cerrar Sesión
+  </ion-button>
+
+</ion-content>
