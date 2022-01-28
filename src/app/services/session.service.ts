@@ -84,10 +84,10 @@ export class SessionService {
     this.session.remove();
   }
 
-  updateSession(id: string) {
+  updateSession(id: string, currentAforo: number) {
     this.session = this.afd.object('/sesion/' + id);
     return this.session.update({
-      aforo: this.sesion.aforo--,
+      aforo: currentAforo-1,
     });
   }
 

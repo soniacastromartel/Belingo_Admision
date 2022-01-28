@@ -34,9 +34,8 @@ export class ModalFichaPage implements OnInit {
     email: '',
     img: '',
     fechaNaci: '',
-    conflictivo: ''
+    conflictivo: '',
   };
-
 
   constructor(
     private modalCtrl: ModalController,
@@ -46,8 +45,18 @@ export class ModalFichaPage implements OnInit {
 
   ngOnInit() {}
 
-  onClick() {
-    this.modalCtrl.dismiss();
+  onClick(formulario: NgForm) {
+    this.modalCtrl.dismiss({
+      nombre: formulario.value.nombre,
+      apellido1: formulario.value.apellido1,
+      apellido2: formulario.value.apellido2,
+      dni: formulario.value.dni,
+      telefono: formulario.value.telefono,
+      sexo: formulario.value.sexo,
+      email: formulario.value.email,
+      fechaNaci: this.fecha,
+      conflictivo: formulario.value.conflictivo,
+    });
   }
 
   onSubmit(formulario: NgForm) {
@@ -60,18 +69,15 @@ export class ModalFichaPage implements OnInit {
       telefono: formulario.value.telefono,
       sexo: formulario.value.sexo,
       email: formulario.value.email,
-      fechaNaci:this.fecha,
-      conflictivo: formulario.value.conflictivo
+      fechaNaci: this.fecha,
+      conflictivo: formulario.value.conflictivo,
     });
-
   }
-
 
   cambioFecha(event) {
     // console.log(event);
-    this.fecha= event.detail.value;
+    this.fecha = event.detail.value;
     console.log(this.fecha);
     // console.log('date', moment(date).format('DD-MM-YYYY'));
   }
-
 }

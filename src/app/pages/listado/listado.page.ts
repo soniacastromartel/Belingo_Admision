@@ -16,6 +16,7 @@ import { IClient } from 'src/app/interfaces/iclient';
 import { Access } from 'src/app/interfaces/iaccess';
 import { EntranceService } from 'src/app/services/entrance.service';
 import { SessionService } from 'src/app/services/session.service';
+import { Session } from 'src/app/interfaces/isession';
 
 @Component({
   selector: 'app-listado',
@@ -44,14 +45,22 @@ export class ListadoPage implements OnInit {
     fechaNaci: '',
   };
 
-  acceso: Access ={
+  acceso: Access = {
     $key: '',
     fechaHoraEntrada: '',
     dni: '',
     sexo: '',
     conflictivo: '',
     clientKey: '',
-    sessionKey:''
+    sessionKey: '',
+  };
+
+  sesion: Session = {
+    key: '',
+    fechaHoraInicio: '',
+    fechaHoraFin: '',
+    usuario: '',
+    aforo: 200,
   };
 
   message = '';
@@ -59,7 +68,6 @@ export class ListadoPage implements OnInit {
   skey: string;
 
   fecha: Date = new Date();
-
 
   container = document.getElementById('container');
 
@@ -75,7 +83,7 @@ export class ListadoPage implements OnInit {
     // this.clients = this.dataService.getClients();
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.fetchClients();
     const clientRes = this.dataService.getClients();
     clientRes.snapshotChanges().subscribe((res) => {
@@ -86,6 +94,16 @@ export class ListadoPage implements OnInit {
         a['$key'] = item.key;
         this.Clients.push(a as IClient);
       });
+    });
+    const key = await this.sessionService.getKey();
+    const session = this.sessionService.getSessionById(key);
+    session.snapshotChanges().subscribe((snap) => {
+      console.log(snap.key);
+      console.log(snap.payload.val());
+      const a = snap.payload.val();
+      this.sesion = a;
+      this.sesion.key = snap.key;
+      console.log(a);
     });
   }
 
@@ -116,11 +134,10 @@ export class ListadoPage implements OnInit {
     this.ionList.closeSlidingItems();
   }
 
-
   deleteClient(key: string) {
-      console.log(key);
-      this.dataService.deleteClient(key);
-      console.log('borrado');
+    console.log(key);
+    this.dataService.deleteClient(key);
+    console.log('borrado');
   }
 
   async presentAlert(key: string) {
@@ -157,7 +174,12 @@ export class ListadoPage implements OnInit {
     const alert = await this.alertCtrl.create({
       backdropDismiss: false,
       header: 'Accesos',
-      subHeader: 'El acceso para el cliente '+ nombre+' '+apellido+ ' se ha realizado con éxito',
+      subHeader:
+        'El acceso para el cliente ' +
+        nombre +
+        ' ' +
+        apellido +
+        ' se ha realizado con éxito',
       buttons: [
         {
           text: 'Aceptar',
@@ -186,7 +208,7 @@ export class ListadoPage implements OnInit {
         sexo: client.sexo,
         fecha: client.fechaNaci,
         img: client.img,
-        conflictivo: client.conflictivo
+        conflictivo: client.conflictivo,
       },
     });
     await modal.present();
@@ -203,46 +225,40 @@ export class ListadoPage implements OnInit {
       email: data.email,
       img: data.img,
       fechaNaci: data.fechaNaci,
-      conflictivo: data.conflictivo
+      conflictivo: data.conflictivo,
     };
     this.updateClient(id, client);
     this.ionList.closeSlidingItems();
     console.log(id);
     console.log(client);
     console.log(data);
-
   }
 
-   async registrarAcceso(client, id) {
-   await this.sessionService.getKey().then(res => {
-      console.log(res);
-      // console.log(key);
+  async registrarAcceso(client, id) {
+    console.log(this.sesion);
 
-      this.acceso = {
-        fechaHoraEntrada: this.fecha.toISOString(),
-        dni: client.dni,
-        conflictivo: client.conflictivo,
-        sexo: client.sexo,
-        clientKey: id,
-        sessionKey:res
-      };
-      console.log(this.acceso);
-      this.entranceService.createAcceso(this.acceso).then((result) => {
+    this.acceso = {
+      fechaHoraEntrada: this.fecha.toISOString(),
+      dni: client.dni,
+      conflictivo: client.conflictivo,
+      sexo: client.sexo,
+      clientKey: id,
+      sessionKey: this.sesion.key,
+    };
+
+    console.log(this.acceso);
+    this.entranceService
+      .createAcceso(this.acceso)
+      .then(() => {
         this.presentAccessAlert(client.nombre, client.apellido1);
-        this.sessionService.updateSession(res);
-        console.log(res);
+        this.sessionService.updateSession(this.sesion.key, this.sesion.aforo);
+        // console.log(this.sesion.key);
 
-        console.log(result.key);
+        // console.log(result.key);
         console.log('registrado acceso');
         // this.modalCtrl.dismiss();
-
       })
       .catch((error) => console.log(error));
-
-
-    });
-    console.log(id);
-
 
   }
 }

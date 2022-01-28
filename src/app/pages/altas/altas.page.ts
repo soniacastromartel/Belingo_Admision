@@ -49,17 +49,6 @@ export class AltasPage implements OnInit {
 
   img: '';
 
-  customPickerOptions = {
-    buttons: [
-      {
-        text: 'Aceptar',
-        handler: (event) => {},
-      },
-      {
-        text: 'Mundo',
-      },
-    ],
-  };
 
   constructor(
     private dataService: DataService,

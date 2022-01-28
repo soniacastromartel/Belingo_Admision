@@ -7,15 +7,31 @@
 
 <ion-content fullscreen class="ion-padding">
 
+
+
   <form (ngSubmit)="onSubmit(formulario)" role="form" #formulario="ngForm">
-    <div>
-      <div>
+
+    <ion-card>
+
+      <!-- <ion-card-header>
+        <ion-card-title>
+          <ion-img src={{img}} alt=""></ion-img>
+        </ion-card-title>
+      </ion-card-header> -->
+
+      <ion-card-content>
+
         <ion-list class="custom">
+
+          <ion-item lines="none">
+            <ion-img src={{img}} alt=""></ion-img>
+          </ion-item>
+
           <ion-list-header color="none"><u> <strong>DATOS PERSONALES</strong> </u> </ion-list-header>
 
-          <ion-item>
+          <!-- <ion-item>
             <ion-img src={{img}}></ion-img>
-          </ion-item>
+          </ion-item> -->
 
           <ion-grid fixed>
             <ion-row>
@@ -94,7 +110,8 @@
 
                 <ion-item>
                   <ion-label position="floating">Conflictivo</ion-label>
-                  <ion-select placeholder="Seleccione" name="conflictivo" [value]="conflictivo"[(ngModel)]="conflictivo">
+                  <ion-select placeholder="Seleccione" name="conflictivo" [value]="conflictivo"
+                    [(ngModel)]="conflictivo">
                     <ion-select-option value="sí">Sí</ion-select-option>
                     <ion-select-option value="no">No</ion-select-option>
                   </ion-select>
@@ -109,23 +126,24 @@
         <ion-grid fixed>
           <ion-row>
 
-              <ion-button [disabled]="formulario.pristine"
-            type="submit" color="primary">
+            <ion-button [disabled]="formulario.pristine" type="submit" color="primary">
               <ion-icon slot="start" name="create-outline"></ion-icon>
-                Editar
-              </ion-button>
+              Editar
+            </ion-button>
 
 
 
-              <ion-button color="danger"  (click)="onClick()">
-                <ion-icon slot="start" name="log-out-outline"></ion-icon>
-                Salir
-              </ion-button>
+            <ion-button color="danger" (click)="onClick(formulario)">
+              <ion-icon slot="start" name="log-out-outline"></ion-icon>
+              Salir
+            </ion-button>
 
           </ion-row>
         </ion-grid>
-      </div>
-    </div>
+
+      </ion-card-content>
+    </ion-card>
+
   </form>
 
 </ion-content>

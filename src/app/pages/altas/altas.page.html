@@ -1,6 +1,15 @@
-<app-header2 titulo="Altas" link="/clients"></app-header2>
+<ion-header #header class="ion-no-border">
+  <ion-toolbar #toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="white" defaultHref="/clients">
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title class="uname">Altas</ion-title>
+    <img slot="end" src="/assets/img/Belingologo.png" width="25px" style="display:inline-block" height="25px" />
+  </ion-toolbar>
+</ion-header>
 
-<ion-content fullscreen class="ion-padding">
+<ion-content scrollEvents="true" [appHideHeader]="header" [fullscreen]="true" class="ion-padding">
 
   <form (ngSubmit)="onSubmit()" [formGroup]="clientForm">
 

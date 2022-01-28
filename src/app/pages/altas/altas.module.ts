@@ -9,6 +9,9 @@ import { AltasPageRoutingModule } from './altas-routing.module';
 import { AltasPage } from './altas.page';
 import { ComponentsModule } from 'src/app/components/components.module';
 
+import { SharedDirectivesModule } from 'src/app/directives/shared-directives.module';
+
+
 @NgModule({
   imports: [
     CommonModule,
@@ -16,7 +19,8 @@ import { ComponentsModule } from 'src/app/components/components.module';
     ReactiveFormsModule,
     IonicModule,
     AltasPageRoutingModule,
-    ComponentsModule
+    ComponentsModule,
+    SharedDirectivesModule
   ],
   declarations: [AltasPage]
 })
