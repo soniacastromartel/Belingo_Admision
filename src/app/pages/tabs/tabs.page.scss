@@ -1,0 +1,15 @@
+ion-tabs {
+  --ion-tabbar-background: blue;
+  --ion-tabs-background-color: var(--ion-tabbar-background-color, #ffffff);
+}
+
+// .tabs-md .tabbar,
+// .tabs-ios .tabbar {
+
+//   background: linear-gradient(rgb(3, 132, 218), rgb(2, 3, 46));
+// }
+
+ion-tab-bar{
+  --background:  #cddf9f !important;
+}
+

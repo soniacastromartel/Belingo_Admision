@@ -36,6 +36,7 @@
     "@ngx-translate/http-loader": "^6.0.0",
     "chart.js": "^3.7.0",
     "cordova-plugin-globalization": "^1.11.0",
+    "electron": "^16.0.8",
     "firebase": "^9.6.1",
     "lodash-es": "^4.17.21",
     "moment": "^2.29.1",

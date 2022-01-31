@@ -33,17 +33,21 @@
   <ion-card class="card">
     <ion-card-header>
       <ion-card-title>Accesos</ion-card-title>
-      <ion-card-subtitle>Aforo total: 200  </ion-card-subtitle>
+      <ion-card-subtitle>Aforo total: 200
+      </ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
       <canvas #doughnutCanvas></canvas>
+      <div>
+        <ion-label>Restantes: {{aforo}} </ion-label>
+      </div>
+
     </ion-card-content>
   </ion-card>
 
 </div>
 
 <div>
-  <ion-label>Restantes: {{aforo}} </ion-label>
 </div>
 
 <!-- <ion-button (click)="onClick()" expand="block"  shape="round">
