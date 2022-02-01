@@ -32,10 +32,10 @@ const routes: Routes = [
     path: 'listado',
     loadChildren: () => import('./pages/listado/listado.module').then( m => m.ListadoPageModule)
   },
-  // {
-  //   path: 'visitas',
-  //   loadChildren: () => import('./pages/visitas/visitas.module').then( m => m.VisitasPageModule)
-  // },
+  {
+    path: 'visitas',
+    loadChildren: () => import('./pages/visitas/visitas.module').then( m => m.VisitasPageModule)
+  },
   {
     path: 'modal-ficha',
     loadChildren: () => import('./pages/modal-ficha/modal-ficha.module').then( m => m.ModalFichaPageModule)

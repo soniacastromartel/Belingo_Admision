@@ -4,30 +4,17 @@
       <ion-back-button color="white" defaultHref="/clients">
       </ion-back-button>
     </ion-buttons>
-    <ion-title class="uname">Accesos</ion-title>
+    <ion-title class="uname">Visitas</ion-title>
     <img slot="end" src="/assets/img/Belingologo.png" width="25px" style="display:inline-block" height="25px" />
   </ion-toolbar>
-  <ion-searchbar placeholder="Buscar Cliente" inputmode="text" (ionChange)="onSearchChange($event)" [debounce]="250">
-  </ion-searchbar>
+
 </ion-header>
 
 <ion-content fullscreen class="ion-padding">
+<ion-button (click)="startScan()" expand="block"  shape="round">
+  <ion-icon slot="start" name="barcode-outline"></ion-icon>
+  Start Scan
+</ion-button>
 
-  <ion-list class="bg-transparent"
-  *ngFor="let client of Clients |filtro: dni">
-  <ion-item>
-    <ion-avatar slot="start">
-      <img src="{{client.img}}" />
-    </ion-avatar>
-    <ion-label>
-      <h2><strong>{{client.nombre}} {{client.apellido1}} {{client.apellido2}}</strong></h2>
-      <h3>{{client.dni}}</h3>
-      <h4>{{client.telefono}}</h4>
-      <h4>{{client.sexo}}</h4>
-      <h4>{{client.email}}</h4>
-      <h4>{{client.fechaNaci | date: 'shortDate'}}</h4>
-    </ion-label>
-  </ion-item>
-  </ion-list>
 
 </ion-content>

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { IClient } from 'src/app/interfaces/iclient';
-import { Client } from 'src/app/models/client';
 import { DataService } from 'src/app/services/client.service';
+
+import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-visitas',
@@ -10,53 +11,49 @@ import { DataService } from 'src/app/services/client.service';
 })
 export class VisitasPage implements OnInit {
 
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  Clients = [];
 
-  client: Client = {
-    key: '',
-    nombre: '',
-    apellido1: '',
-    apellido2: '',
-    dni: '',
-    telefono: '',
-    sexo: '',
-    email: '',
-    img: '',
-    fechaNaci: '',
-  };
 
-  dni = '';
-
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService, private alertCtrl: AlertController) { }
 
   ngOnInit() {
-    this.fetchClients();
-    const clientRes = this.dataService.getClients();
-    clientRes.snapshotChanges().subscribe((res) => {
-      this.Clients = [];
-      res.forEach((item) => {
-        const a = item.payload.toJSON();
-        // eslint-disable-next-line @typescript-eslint/dot-notation
-        a['$key'] = item.key;
-        this.Clients.push(a as IClient);
-      });
+
+  }
+
+  async startScan() {
+    await this.checkPermissions();
+    const result = await BarcodeScanner.startScan();
+    console.log(result);
+
+  }
+
+  async checkPermissions() {
+    return new Promise (async (resolve, reject) => {
+      const status= await BarcodeScanner.checkPermission({force: true});
+      console.log(status);
+      if(status.granted){
+        resolve(true);
+      }else if (status.denied){
+        const alert = await this.alertCtrl.create({
+          header:'No tiene permisos',
+          message:'Por favor, active la cámara en las opciones',
+          buttons: [{text: 'No',
+          role: 'cancel'
+
+        },{text: 'Abrir opciones',
+        handler: () => {
+          resolve(false);
+          BarcodeScanner.openAppSettings();
+
+        }
+      }
+
+      ]
+
+        })
+      }
     });
-  }
-
-  fetchClients() {
-    this.dataService
-      .getClients()
-      .valueChanges()
-      .subscribe((res) => {
-        console.log(res);
-      });
-  }
-
-  onSearchChange(event) {
-    this.dni = event.detail.value;
-    console.log(event.detail);
 
   }
+
 
 }
