@@ -1,4 +1,4 @@
-<ion-header class="ion-no-border">
+<ion-header class="ion-no-border" [hidden]="scanActive">
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button color="white" defaultHref="/clients">
@@ -10,11 +10,46 @@
 
 </ion-header>
 
-<ion-content fullscreen class="ion-padding">
-<ion-button (click)="startScan()" expand="block"  shape="round">
-  <ion-icon slot="start" name="barcode-outline"></ion-icon>
-  Start Scan
-</ion-button>
+<ion-content fullscreen class="ion-padding" [style.--background]="scanActive ? '#00000000' : 'linear-gradient(#1c8590,#ff9800)'">
+
+
+  <ion-card [hidden]="scanActive">
+    <ion-img src="/assets/img/barcode.jpg"></ion-img>
+    <ion-card-header>
+      <ion-card-subtitle></ion-card-subtitle>
+      <ion-card-title>Escanear DNI Cliente</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+
+
+      <ion-label>Clique el botón para escanear el código de barras del DNI del Cliente</ion-label>
+
+
+
+
+      <ion-button (click)="startScan()" expand="block" shape="round">
+        <ion-icon slot="start" name="barcode-outline"></ion-icon>
+        Start Scan
+      </ion-button>
+
+      <p class="ion-text-center" *ngIf="result && !scanActive">{{result}}</p>
+
+    </ion-card-content>
+  </ion-card>
+
+  <div class="scan-box" [hidden]="!scanActive"></div>
+
+
+  <ion-row class="scanner-buttons" [hidden]="!scanActive">
+    <ion-col class="ion-no-padding" >
+      <ion-button (click)="stopScan()"  shape="round">
+        <ion-icon slot="start" name="stop-circle-outline"></ion-icon>
+        Stop Scan
+      </ion-button>
+    </ion-col>
+  </ion-row>
+
+
 
 
 </ion-content>

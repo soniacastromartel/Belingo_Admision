@@ -1,28 +1,46 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { DataService } from 'src/app/services/client.service';
 
 import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
 import { AlertController } from '@ionic/angular';
+
+
 
 @Component({
   selector: 'app-visitas',
   templateUrl: './visitas.page.html',
   styleUrls: ['./visitas.page.scss'],
 })
-export class VisitasPage implements OnInit {
+export class VisitasPage implements AfterViewInit, OnDestroy {
 
-
+result = null;
+scanActive = false;
 
   constructor(private dataService: DataService, private alertCtrl: AlertController) { }
 
-  ngOnInit() {
+  ngAfterViewInit() {
+    BarcodeScanner.prepare();
 
   }
 
+  ngOnDestroy() {
+    BarcodeScanner.stopScan();
+  }
+
+
   async startScan() {
-    await this.checkPermissions();
+  const allowed= await this.checkPermissions();
+
+  if (allowed){
+    this.scanActive=true;
     const result = await BarcodeScanner.startScan();
-    console.log(result);
+
+    if(result.hasContent){
+      this.result= result.content;
+      this.scanActive= false;
+    }
+  }
+
 
   }
 
@@ -41,18 +59,23 @@ export class VisitasPage implements OnInit {
 
         },{text: 'Abrir opciones',
         handler: () => {
-          resolve(false);
           BarcodeScanner.openAppSettings();
+          resolve(false);
 
         }
       }
 
       ]
 
-        })
+        });
       }
     });
 
+  }
+
+  stopScan() {
+    BarcodeScanner.stopScan();
+    this.scanActive=false;
   }
 
 

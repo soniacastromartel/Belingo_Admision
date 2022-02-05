@@ -49,6 +49,7 @@ async getUid() {
 }
 
 
+
 async getUser() {
   const user = await this.auth.currentUser;
   console.log(user);

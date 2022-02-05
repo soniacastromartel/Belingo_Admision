@@ -194,6 +194,8 @@ export class ListadoPage implements OnInit {
     await alert.present();
   }
 
+  
+
   async showModal(client, id) {
     const modal = await this.modalCtrl.create({
       component: ModalFichaPage,
@@ -258,7 +260,10 @@ export class ListadoPage implements OnInit {
         console.log('registrado acceso');
         // this.modalCtrl.dismiss();
       })
-      .catch((error) => console.log(error));
+      .catch((error) =>{
+        console.log(error);
+
+      });
 
   }
 }

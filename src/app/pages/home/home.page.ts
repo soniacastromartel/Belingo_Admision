@@ -16,7 +16,8 @@ export class HomePage implements OnInit {
   isAdmin;
   data;
 
-  pelele=true;
+  // user;
+
 
   sesion: Session = {
     key: '',
@@ -26,14 +27,14 @@ export class HomePage implements OnInit {
     aforo: 200,
   };
 
-  // user = {
-  //   key: '',
-  //   uid: '',
-  //   email: '',
-  //   password: '',
-  //   isAdmin: false,
-  //   nombre: '',
-  // };
+  user: User={
+    key: '',
+    uid: '',
+    email: '',
+    password: '',
+    isAdmin: false,
+    nombre: '',
+  };
 
   end: Date = new Date();
 
@@ -44,6 +45,7 @@ export class HomePage implements OnInit {
     private sessionService: SessionService,
     private userService: UserService
   ) {
+    // this.onViewWillLoad();
     // this.isAdmin = this.getAdmin();
     // console.log(this.isAdmin);
     // this.data =
@@ -52,7 +54,10 @@ export class HomePage implements OnInit {
   }
 
   async ngOnInit() {
-    const key = await this.sessionService.getKey();
+
+
+    const key = await this.sessionService.getLast();
+    console.log(key);
     const session = this.sessionService.getSessionById(key);
     session.snapshotChanges().subscribe((snap) => {
       console.log(snap.key);
@@ -63,8 +68,18 @@ export class HomePage implements OnInit {
       console.log(this.sesion.key);
     });
 
-    this.isAdmin= await this.getAdmin();
-    console.log(this.isAdmin);
+    await this.authService.getUser().then((res) => {
+      console.log(res.uid);
+      this.userService.getUserById(res.uid).snapshotChanges().subscribe((data) => {
+        console.log(data.payload.val());
+        this.user= data.payload.val();
+        this.isAdmin = data.payload.val().isAdmin;
+        console.log(this.isAdmin);
+      });
+    });
+
+    // this.isAdmin= await this.getAdmin();
+    // console.log(this.isAdmin);
   }
 
   async onClick() {
@@ -79,6 +94,11 @@ export class HomePage implements OnInit {
       });
   }
 
+  //   async onViewWillLoad() {
+  // console.log('first');
+  // this.isAdmin= await this.getAdmin();
+  // console.log(this.isAdmin);
+  //   }
 
   getIsAdmin() {
     return new Promise<boolean>(async (resolve) => {
@@ -102,6 +122,4 @@ export class HomePage implements OnInit {
     console.log(this.isAdmin);
     return this.isAdmin;
   }
-
-
 }

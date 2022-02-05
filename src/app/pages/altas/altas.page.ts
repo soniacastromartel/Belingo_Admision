@@ -20,6 +20,7 @@ import {
 import { Router } from '@angular/router';
 import { Clientphoto } from 'src/app/interfaces/iclientphoto';
 import { Capacitor } from '@capacitor/core';
+import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
 
 @Component({
   selector: 'app-altas',
@@ -164,26 +165,6 @@ export class AltasPage implements OnInit {
     const actionSheet = await this.actionSheetController.create({
       header: 'Fotos',
       buttons: [
-        // {
-        //   text: 'Aceptar',
-        //   role: 'selected',
-        //   icon: 'add',
-        //   handler: () => {
-        //     console.log(photo);
-        //     console.log('Ha pasado por el base64 harcodeado');
-
-        //     let imageFile;
-        //     fetch(photo.webviewPath)
-        //       .then((x) => x.blob())
-        //       .then((data) => {
-        //         imageFile = new File([data], uuid.v4() + '_' + photo.filepath, {
-        //           type: 'image/png',
-        //         });
-
-        //         this.newImageUpload(imageFile);
-        //       });
-        //   },
-        // },
         {
           text: 'Borrar',
           role: 'destructive',
@@ -207,4 +188,16 @@ export class AltasPage implements OnInit {
     console.log(new Date(event.detail.value));
     // console.log('date', moment(date).format('DD-MM-YYYY'));
   }
+
+//   generateBarCode() {
+//     BarcodeScanner.encode(this.scanner.Encode.TEXT_TYPE, this.encodedData).then(
+//         res => {
+//           alert(res);
+//           this.encodedData = res;
+//         }, error => {
+//           alert(error);
+//         }
+//     );
+// }
+
 }
