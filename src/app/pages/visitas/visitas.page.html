@@ -37,6 +37,12 @@
     </ion-card-content>
   </ion-card>
 
+
+  <ion-item>
+    <ion-button class="ion-text-center" *ngIf="result && !scanActive"(click)="showModal(result)" >{{result}}</ion-button>
+  </ion-item>
+
+
   <div class="scan-box" [hidden]="!scanActive"></div>
 
 

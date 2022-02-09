@@ -9,6 +9,7 @@ import { VisitasPageRoutingModule } from './visitas-routing.module';
 import { VisitasPage } from './visitas.page';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { PipesModule } from 'src/app/pipes/pipes.module';
+import { ModalVisitaPageModule } from '../modal-visita/modal-visita.module';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import { PipesModule } from 'src/app/pipes/pipes.module';
     IonicModule,
     VisitasPageRoutingModule,
     ComponentsModule,
+    ModalVisitaPageModule,
     PipesModule
   ],
   declarations: [VisitasPage]

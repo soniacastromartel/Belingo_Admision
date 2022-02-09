@@ -63,7 +63,11 @@ const routes: Routes = [
   {
     path: 'tabs',
     loadChildren: () => import('./pages/tabs/tabs.module').then( m => m.TabsPageModule)
+  },  {
+    path: 'modal-visita',
+    loadChildren: () => import('./pages/modal-visita/modal-visita.module').then( m => m.ModalVisitaPageModule)
   },
+
 ];
 
 @NgModule({
