@@ -1,16 +1,33 @@
-<app-header titulo="Administración"></app-header>
-
 
 <ion-content fullscreen class="ion-padding">
+  <ion-slides pager="ios" class="slide-full">
 
-  <ion-button routerLink="/create-user" expand="block" color="primary" shape="round">
-    <ion-icon slot="start" name="person-add-outline"></ion-icon>
-    Alta Empleado
-  </ion-button>
+    <ion-slide *ngFor="let slide of slides">
 
-  <ion-button (click)="onClick()" expand="block" color="danger" shape="round">
-    <ion-icon slot="start" name="power-outline"></ion-icon>
-    Cerrar Sesión
-  </ion-button>
+    <ion-card mode="ios">
+    <img [src]="slide.img" class="slide-image"/>
+    <ion-card-header>
+      <ion-card-subtitle>{{slide.titulo}}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      {{slide.desc}}
+
+      <ion-button routerLink="{{slide.link}}" expand="block" fill="clear" shape="round">
+      Ir
+      </ion-button>
+    </ion-card-content>
+    </ion-card>
+
+    </ion-slide>
+
+    <ion-slide>
+    <ion-button color="white" (click)="onClick()" expand="block" fill="clear">
+    <ion-icon slot="start"  name="arrow-back" icon></ion-icon>
+      Comenzar
+    </ion-button>
+    </ion-slide>
+
+      </ion-slides>
+
 
 </ion-content>

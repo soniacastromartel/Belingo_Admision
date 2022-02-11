@@ -4,15 +4,21 @@
     "name": "Home",
     "redirectTo":"/home"
   },
+
+  {
+    "icon": "people-outline",
+    "name": "Clientes",
+    "redirectTo":"/clients"
+  },
   {
     "icon": "stats-chart-outline",
     "name": "Sesión",
     "redirectTo":"/session"
   },
   {
-    "icon": "people-outline",
-    "name": "Clientes",
-    "redirectTo":"/clients"
+    "icon": "build-outline",
+    "name": "Administración",
+    "redirectTo":"/management"
   },
   {
     "icon": "log-out-outline",

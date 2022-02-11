@@ -32,7 +32,7 @@
       <p>{{isAdmin}}</p>
     </div> -->
 
-    <div [hidden]="isAdmin">
+    <div [hidden]="!isAdmin">
       <ion-button routerLink="/management" color="warning" expand="block" shape="round">
         <ion-icon slot="start" name="build-outline"></ion-icon>
         Administración

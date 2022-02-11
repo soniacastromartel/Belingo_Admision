@@ -10,7 +10,8 @@ import { AltasPage } from './altas.page';
 import { ComponentsModule } from 'src/app/components/components.module';
 
 import { SharedDirectivesModule } from 'src/app/directives/shared-directives.module';
-
+import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ import { SharedDirectivesModule } from 'src/app/directives/shared-directives.mod
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
+    NgxQRCodeModule,
     AltasPageRoutingModule,
     ComponentsModule,
     SharedDirectivesModule

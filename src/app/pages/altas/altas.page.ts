@@ -20,7 +20,9 @@ import {
 import { Router } from '@angular/router';
 import { Clientphoto } from 'src/app/interfaces/iclientphoto';
 import { Capacitor } from '@capacitor/core';
-import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+
+import { NgxQrcodeElementTypes } from '@techiediaries/ngx-qrcode';
 
 @Component({
   selector: 'app-altas',
@@ -31,6 +33,9 @@ export class AltasPage implements OnInit {
   @ViewChild(IonDatetime, { static: true }) datetime: IonDatetime;
 
   clientForm: FormGroup;
+
+  createdCode= null;
+  elementType = NgxQrcodeElementTypes.IMG;
 
   fechaNaci: Date = new Date();
 
@@ -50,14 +55,15 @@ export class AltasPage implements OnInit {
 
   img: '';
 
+  qrData: any;
+
 
   constructor(
     private dataService: DataService,
-    private router: Router,
     private fb: FormBuilder,
-    private plt: Platform,
     public actionSheetController: ActionSheetController,
-    public fireStorageService: FireStorageService
+    public fireStorageService: FireStorageService,
+    private scanner: BarcodeScanner
   ) {}
 
    ngOnInit() {
@@ -86,11 +92,14 @@ export class AltasPage implements OnInit {
 
         this.dataService
           .createClient(this.client)
-          .then((res) => {
+          .then(async (res) => {
             console.log(this.client);
-            console.log(res);
             console.log(res.key);
-            this.clientForm.reset();
+             await this.createQR (this.clientForm.value.dni).then((result) => {
+               console.log(result);
+               this.clientForm.reset();
+             });
+
           })
           .catch((error) => console.log(error));
       });
@@ -184,20 +193,52 @@ export class AltasPage implements OnInit {
     await actionSheet.present();
   }
 
+  async showQRActionSheet() {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Código QR',
+      buttons: [
+        {
+          text: 'Borrar',
+          role: 'destructive',
+          icon: 'trash',
+          handler: () => {
+          },
+        },
+        {
+          text: 'Enviar',
+          icon: 'mail-outline',
+          // role: 'selected',
+          handler: () => {
+
+          },
+        },
+      ],
+    });
+    await actionSheet.present();
+  }
+
   cambioFecha(event) {
     console.log(new Date(event.detail.value));
     // console.log('date', moment(date).format('DD-MM-YYYY'));
   }
 
-//   generateBarCode() {
-//     BarcodeScanner.encode(this.scanner.Encode.TEXT_TYPE, this.encodedData).then(
+//   generateBarCode(data) {
+//     this.scanner.encode(this.scanner.Encode.TEXT_TYPE, data).then(
 //         res => {
-//           alert(res);
-//           this.encodedData = res;
+//           console.log(res);
+//           data = res;
+//           return data;
 //         }, error => {
-//           alert(error);
+//           console.log(error);
 //         }
 //     );
 // }
+
+createQR(data) {
+  this.createdCode= data;
+  console.log(this.createdCode);
+  return this.createdCode;
+
+}
 
 }

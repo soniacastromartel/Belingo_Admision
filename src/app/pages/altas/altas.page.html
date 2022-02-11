@@ -22,7 +22,7 @@
             <ion-label><strong>FOTO CLIENTE</strong> </ion-label>
 
             <ion-item *ngFor="let photo of fireStorageService.photos; index as position">
-              <ion-img [src]="photo.webviewPath" (click)="showActionSheet(photo, position)"  >
+              <ion-img [src]="photo.webviewPath" (click)="showActionSheet(photo, position)">
               </ion-img>
             </ion-item>
 
@@ -79,7 +79,7 @@
       <ion-item>
         <ion-label position="floating">Email</ion-label>
         <ion-input type="email" placeholder="Introduzca el email" formControlName="email"
-          pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"></ion-input>
+          pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" required></ion-input>
       </ion-item>
 
       <ion-item>
@@ -91,7 +91,7 @@
 
       <ion-item>
         <ion-label>Conflictivo</ion-label>
-        <ion-select placeholder="Seleccione" formControlName="conflictivo" >
+        <ion-select placeholder="Seleccione" formControlName="conflictivo">
           <ion-select-option value="si">Sí</ion-select-option>
           <ion-select-option value="no">No</ion-select-option>
 
@@ -115,5 +115,28 @@
     </ion-row>
 
   </form>
+
+  <!-- <ion-item>
+    <ion-input type="text" placeholder="Awesome Input" [(ngModel)]="qrData"></ion-input>
+  </ion-item> -->
+
+  <!-- <ion-button (click)="createQR()" expand="block" shape="round">
+    Generar QR
+  </ion-button> -->
+
+  <ion-card *ngIf="createdCode">
+
+    <ion-card-content>
+      <ion-item (click)="showQRActionSheet()">
+        <ngx-qrcode [value]="createdCode"
+        [elementType]="elementType"></ngx-qrcode>
+      </ion-item>
+
+      <ion-label>Value: {{createdCode}}</ion-label>
+    </ion-card-content>
+
+  </ion-card>
+
+
 
 </ion-content>
