@@ -7,13 +7,13 @@
     <ion-card mode="ios">
     <img [src]="slide.img" class="slide-image"/>
     <ion-card-header>
-      <ion-card-subtitle>{{slide.titulo}}</ion-card-subtitle>
+      <ion-card-subtitle><b>{{slide.titulo}}</b></ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
       {{slide.desc}}
 
       <ion-button routerLink="{{slide.link}}" expand="block" fill="clear" shape="round">
-      Ir
+      Ir <ion-icon slot="end" name="arrow-down"></ion-icon>
       </ion-button>
     </ion-card-content>
     </ion-card>

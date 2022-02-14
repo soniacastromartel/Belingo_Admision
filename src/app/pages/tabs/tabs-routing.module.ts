@@ -15,8 +15,13 @@ const routes: Routes = [
     children: [
     {  path: 'estadistica',
     loadChildren: () => import ('../estadistica/estadistica.module').then(m => m.EstadisticaPageModule),
-
-  }
+  },
+  {  path: 'estadistica-mes',
+    loadChildren: () => import ('../estadistica-mes/estadistica-mes.module').then(m => m.EstadisticaMesPageModule),
+  },
+  {  path: 'estadistica-dia',
+    loadChildren: () => import ('../estadistica/estadistica.module').then(m => m.EstadisticaPageModule),
+  },
 
     ]
   }

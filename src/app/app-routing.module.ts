@@ -67,6 +67,10 @@ const routes: Routes = [
     path: 'modal-visita',
     loadChildren: () => import('./pages/modal-visita/modal-visita.module').then( m => m.ModalVisitaPageModule)
   },
+  {
+    path: 'estadistica-mes',
+    loadChildren: () => import('./pages/estadistica-mes/estadistica-mes.module').then( m => m.EstadisticaMesPageModule)
+  },
 
 ];
 
