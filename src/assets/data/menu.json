@@ -16,9 +16,14 @@
     "redirectTo":"/session"
   },
   {
-    "icon": "build-outline",
+    "icon": "lock-closed-outline",
     "name": "Administración",
     "redirectTo":"/management"
+  },
+  {
+    "icon": "cog-outline",
+    "name": "Ajustes",
+    "redirectTo":"/settings"
   },
   {
     "icon": "log-out-outline",

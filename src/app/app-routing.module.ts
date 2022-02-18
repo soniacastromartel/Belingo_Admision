@@ -71,6 +71,10 @@ const routes: Routes = [
     path: 'estadistica-mes',
     loadChildren: () => import('./pages/estadistica-mes/estadistica-mes.module').then( m => m.EstadisticaMesPageModule)
   },
+  {
+    path: 'settings',
+    loadChildren: () => import('./pages/settings/settings.module').then( m => m.SettingsPageModule)
+  },
 
 ];
 

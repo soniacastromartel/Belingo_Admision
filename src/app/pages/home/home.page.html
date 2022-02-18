@@ -6,6 +6,7 @@
         <div class="container">
           <div class="play-full">
             <ion-img src="./assets/img/Belingologo.png"></ion-img>
+            <ion-label>Belingo Admisión</ion-label>
           </div>
         </div>
       </ion-col>
@@ -16,7 +17,7 @@
 
   <ion-grid fixed>
 
-    <ion-button class="" routerLink="/clients" color="primary" expand="block" shape="round">
+    <ion-button routerLink="/clients" color="primary" expand="block" shape="round">
       <ion-icon slot="start" name="people-outline"></ion-icon>
       Clientes
     </ion-button>
@@ -33,11 +34,24 @@
     </div> -->
 
     <div [hidden]="!isAdmin">
-      <ion-button routerLink="/management" color="warning" expand="block" shape="round">
-        <ion-icon slot="start" name="build-outline"></ion-icon>
+      <ion-button routerLink="/management" color="primary" expand="block" shape="round">
+        <ion-icon slot="start" name="lock-closed-outline"></ion-icon>
         Administración
       </ion-button>
     </div>
+
+    <!-- <ion-list>
+      <ion-item>
+        <ion-icon slot="start" name="moon"></ion-icon>
+        <ion-label>Modo Oscuro</ion-label>
+        <ion-toggle slot="end" [(ngModel)]="darkMode" (ionChange)="change()"></ion-toggle>
+      </ion-item>
+    </ion-list> -->
+
+    <ion-button routerLink="/settings" expand="block" color="primary" shape="round">
+      <ion-icon slot="start" name="settings-outline"></ion-icon>
+      Ajustes
+    </ion-button>
 
 
     <ion-button (click)="onClick()" expand="block" color="danger" shape="round">

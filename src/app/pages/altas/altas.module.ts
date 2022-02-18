@@ -13,6 +13,8 @@ import { SharedDirectivesModule } from 'src/app/directives/shared-directives.mod
 import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 
+// import { EmailComposer } from '@awesome-cordova-plugins/email-composer/ngx';
+
 @NgModule({
   imports: [
     CommonModule,

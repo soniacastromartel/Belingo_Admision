@@ -1,0 +1,49 @@
+<ion-header #header class="ion-no-border">
+  <ion-toolbar #toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="white" defaultHref="/home">
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title class="uname">Ajustes</ion-title>
+    <img slot="end" src="/assets/img/Belingologo.png" width="25px" style="display:inline-block" height="25px" />
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen class="ion-padding">
+
+  <ion-list class="bg-transparent">
+
+    <ion-item (click)="buttonClick()" detail>
+      <ion-icon name="phone-portrait-outline"slot="start"></ion-icon>
+      <ion-label><strong>
+
+        Sobre la Aplicación</strong></ion-label>
+    </ion-item>
+
+    <ion-item (click)="buttonClick()" detail>
+      <ion-icon name="sunny-outline" slot="start"></ion-icon>
+      <ion-label><strong>
+
+       Pantalla</strong></ion-label>
+    </ion-item>
+
+    <ion-item (click)="buttonClick()" detail>
+      <ion-icon name="volume-medium-outline" slot="start"></ion-icon>
+      <ion-label><strong>
+       Sonido</strong></ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon slot="start" name="moon"></ion-icon>
+      <ion-label>Modo Oscuro</ion-label>
+      <ion-toggle slot="end" [(ngModel)]="darkMode" (ionChange)="change()"></ion-toggle>
+    </ion-item>
+
+    <!-- <ion-item>
+      <ion-label>Toggle</ion-label>
+      <ion-toggle slot="end" checked></ion-toggle>
+    </ion-item> -->
+
+  </ion-list>
+
+</ion-content>

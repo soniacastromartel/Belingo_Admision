@@ -23,6 +23,7 @@ import { Capacitor } from '@capacitor/core';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 
 import { NgxQrcodeElementTypes } from '@techiediaries/ngx-qrcode';
+import { EmailService } from 'src/app/services/email.service';
 
 @Component({
   selector: 'app-altas',
@@ -38,6 +39,11 @@ export class AltasPage implements OnInit {
   elementType = NgxQrcodeElementTypes.IMG;
 
   fechaNaci: Date = new Date();
+
+  subject= 'Su código QR';
+  attachments: null;
+  to= 'soniacastromartel@gmail.com';
+  body= 'Este es su código QR. Preséntelo en su próximo acceso a los establecimientos Belingo';
 
   client = {
     $key: '',
@@ -60,6 +66,7 @@ export class AltasPage implements OnInit {
 
   constructor(
     private dataService: DataService,
+    private emailService: EmailService,
     private fb: FormBuilder,
     public actionSheetController: ActionSheetController,
     public fireStorageService: FireStorageService,
@@ -209,6 +216,7 @@ export class AltasPage implements OnInit {
           icon: 'mail-outline',
           // role: 'selected',
           handler: () => {
+            this.emailService.checkAvailability(this.to, this.attachments, this.subject, this.body);
 
           },
         },

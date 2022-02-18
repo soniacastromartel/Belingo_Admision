@@ -13,7 +13,7 @@
           <ion-menu-toggle  *ngFor="let c of componentes|async">
             <ion-item color="none"
             [routerLink]="c.redirectTo"
-            [routerDirection]="'root'">
+            [routerDirection]="'root'" detail>
             <ion-icon slot="start"
             [name]="c.icon"></ion-icon>
               <ion-label>{{c.name}}</ion-label>

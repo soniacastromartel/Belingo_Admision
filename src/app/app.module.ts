@@ -34,6 +34,8 @@ import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 
 
+import { EmailComposer } from '@awesome-cordova-plugins/email-composer/ngx';
+
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
 // export function HttpLoaderFactory(http: HttpClient) {
@@ -70,6 +72,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
     AngularFirestoreModule,
     Globalization,
     BarcodeScanner,
+    EmailComposer,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: LOCALE_ID, useValue: 'es' },
   ],
