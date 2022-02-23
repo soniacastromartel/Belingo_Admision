@@ -194,7 +194,6 @@ export class ListadoPage implements OnInit {
     await alert.present();
   }
 
-  
 
   async showModal(client, id) {
     const modal = await this.modalCtrl.create({

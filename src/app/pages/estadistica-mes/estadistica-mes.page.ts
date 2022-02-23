@@ -31,6 +31,7 @@ export class EstadisticaMesPage implements AfterViewInit {
     key: '',
     hombres: 0,
     mujeres: 0,
+    totalClientes: 0
   };
 
   doughnutChart: any;
@@ -41,6 +42,7 @@ export class EstadisticaMesPage implements AfterViewInit {
   data: any;
 
   name: string;
+  totalClientes;
 
   constructor(private estadisticaMesService: EstadisticaMesService) {}
 
@@ -54,6 +56,7 @@ export class EstadisticaMesPage implements AfterViewInit {
           console.log(item.payload.val());
           this.monthStats.hombres= item.payload.val().hombres;
           this.monthStats.mujeres = item.payload.val().mujeres;
+          this.totalClientes = item.payload.val().totalClientes;
           this.name = item.key;
           console.log(item.key);
 

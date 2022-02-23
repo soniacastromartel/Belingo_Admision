@@ -20,7 +20,7 @@ const routes: Routes = [
     loadChildren: () => import ('../estadistica-mes/estadistica-mes.module').then(m => m.EstadisticaMesPageModule),
   },
   {  path: 'estadistica-dia',
-    loadChildren: () => import ('../estadistica/estadistica.module').then(m => m.EstadisticaPageModule),
+    loadChildren: () => import ('../estadistica-horas/estadistica-horas.module').then(m => m.EstadisticaHorasPageModule),
   },
 
     ]

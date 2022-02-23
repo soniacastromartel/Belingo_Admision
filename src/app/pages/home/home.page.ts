@@ -18,7 +18,6 @@ export class HomePage implements OnInit {
 
   // user;
 
-  darkMode = true;
 
 
   sesion: Session = {
@@ -47,8 +46,6 @@ export class HomePage implements OnInit {
     private sessionService: SessionService,
     private userService: UserService
   ) {
-    const prefersDark= window.matchMedia ('(prefers-color-scheme:dark)');
-    this.darkMode = prefersDark.matches;
     // this.onViewWillLoad();
     // this.isAdmin = this.getAdmin();
     // console.log(this.isAdmin);
@@ -58,10 +55,7 @@ export class HomePage implements OnInit {
   }
 
   //cambiando el modo o tema
-  change() {
-    this.darkMode = !this.darkMode;
-    document.body.classList.toggle('dark');
-     }
+
 
   async ngOnInit() {
 

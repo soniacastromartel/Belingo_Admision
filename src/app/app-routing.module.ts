@@ -75,6 +75,18 @@ const routes: Routes = [
     path: 'settings',
     loadChildren: () => import('./pages/settings/settings.module').then( m => m.SettingsPageModule)
   },
+  {
+    path: 'estadistica-horas',
+    loadChildren: () => import('./pages/estadistica-horas/estadistica-horas.module').then( m => m.EstadisticaHorasPageModule)
+  },
+  {
+    path: 'promos',
+    loadChildren: () => import('./pages/promos/promos.module').then( m => m.PromosPageModule)
+  },
+  {
+    path: 'establecimientos',
+    loadChildren: () => import('./pages/establecimientos/establecimientos.module').then( m => m.EstablecimientosPageModule)
+  },
 
 ];
 

@@ -48,7 +48,8 @@ export class EstadisticaMesService {
     console.log(this.month);
     return this.month.update({
       hombres: month.hombres,
-      mujeres: month.mujeres
+      mujeres: month.mujeres,
+      totalClientes: month.hombres+month.mujeres
     });
   }
 

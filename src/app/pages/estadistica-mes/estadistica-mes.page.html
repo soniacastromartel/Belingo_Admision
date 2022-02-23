@@ -1,4 +1,4 @@
-<app-header2 titulo="Aforo" link="/session"></app-header2>
+<app-header2 titulo="Estadística Mensual" link="/session"></app-header2>
 
 <ion-content fullscreen class="ion-padding">
 <div class>
@@ -9,7 +9,7 @@
         </ion-col>
         <ion-col size="6">
           <ion-label><strong>Belingo Admisión</strong> </ion-label>
-          <ion-label> Estadísticas del Mes</ion-label>
+          <ion-label> Estadística Mensual</ion-label>
         </ion-col>
       </ion-row>
 
@@ -34,6 +34,7 @@
     <ion-card-header>
       <ion-card-title>Estadística por Mes</ion-card-title>
       <ion-card-subtitle>Mes: {{name}}
+        <p>Total de Clientes: {{totalClientes}}</p>
       </ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>

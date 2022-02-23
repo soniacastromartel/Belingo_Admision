@@ -1,0 +1,54 @@
+<app-header2 titulo="Estadística por Horas" link="/session"></app-header2>
+
+<ion-content fullscreen class="ion-padding">
+  <div class>
+
+    <ion-row>
+      <ion-col size="4">
+        <ion-img src="assets/img/Belingologo.png"></ion-img>
+      </ion-col>
+      <ion-col size="6">
+        <ion-label><strong>Belingo Admisión</strong> </ion-label>
+        <ion-label> Estadísticas por Hora</ion-label>
+      </ion-col>
+    </ion-row>
+</div>
+
+<ion-item>
+  <ion-label>Seleccione un día</ion-label>
+  <ion-datetime  [value]="fecha.toISOString()" display-format="DD/MM/YYYY"
+    min="2021-01-01" (ionChange)="onSearchChange( $event )" detail>
+  </ion-datetime>
+</ion-item>
+
+<ion-row>
+  <ion-col size="12"></ion-col>
+</ion-row>
+<ion-row>
+  <ion-col size="12"></ion-col>
+</ion-row>
+<ion-row>
+  <ion-col size="12"></ion-col>
+</ion-row>
+<ion-row>
+  <ion-col size="12"></ion-col>
+</ion-row>
+
+<div class="chart-container">
+
+  <ion-card class="card">
+    <ion-card-header>
+      <ion-card-title>Estadística por Hora</ion-card-title>
+      <!-- <ion-card-subtitle>Mes: {{name}}
+        <p>Total de Clientes: {{totalClientes}}</p>
+      </ion-card-subtitle> -->
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #canvas></canvas>
+
+    </ion-card-content>
+  </ion-card>
+
+</div>
+
+</ion-content>

@@ -3,8 +3,8 @@ import { Observable } from 'rxjs';
 import { Componente } from './interfaces/icomponent';
 import { DataService } from './services/client.service';
 
-import {Globalization} from '@ionic-native/globalization/ngx';
-import {TranslateService} from '@ngx-translate/core';
+import { Globalization } from '@ionic-native/globalization/ngx';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -12,21 +12,34 @@ import {TranslateService} from '@ngx-translate/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent implements OnInit {
-
   componentes: Observable<Componente[]>;
 
-  constructor(private dataService: DataService,
+  constructor(
+    private dataService: DataService,
     // private translateService: TranslateService,
-    private globalization: Globalization) {
-      // this.translateService.setDefaultLang('es');
-      this.getLanguage();
-    }
+    private globalization: Globalization
+  ) {
+    // this.checkDarkTheme();
+    // this.translateService.setDefaultLang('es');
+    this.getLanguage();
+  }
 
   ngOnInit() {
     this.componentes = this.dataService.getMenuOptions();
   }
 
   getLanguage() {
-    this.globalization.getPreferredLanguage().then (res=> console.log(res)).catch(e=> console.log(e));
+    this.globalization
+      .getPreferredLanguage()
+      .then((res) => console.log(res))
+      .catch((e) => console.log(e));
   }
+
+  // checkDarkTheme() {
+  //   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+  //   console.log(prefersDark);
+  //   if (prefersDark.matches){
+  //     document.body.classList.toggle ('dark');
+  //   }
+  // }
 }

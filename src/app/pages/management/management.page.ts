@@ -38,13 +38,13 @@ export class ManagementPage implements OnInit {
       img: '/assets/img/calendar.svg',
       titulo: 'ENVIAR PROMOS',
       desc: 'Enviar promociones y publicidad a los clientes',
-      link: '/action-sheet'
+      link: '/promos'
     },
     {
       img: '/assets/img/placeholder-1.svg',
       titulo: 'CREAR ESTABLECIMIENTOS',
       desc: 'Crear un nuevo establecimiento y ubicar en mapa su geolocalización',
-      link: '/button'
+      link: '/establecimientos'
     }
   ];
 
