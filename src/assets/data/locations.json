@@ -1,0 +1,16 @@
+{
+  "properties": [
+      {
+          "city": "Las Palmas de Gran Canaria",
+          "name": "Bingo Paris",
+          "long": -15.4335,
+          "lat": 28.1396
+      },
+      {
+          "city": "Telde",
+          "name": "MA",
+          "long":  -15.4179,
+          "lat":27.996
+      }
+  ]
+}

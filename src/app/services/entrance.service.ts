@@ -30,29 +30,29 @@ export class EntranceService {
 
   createAcceso(acceso: any) {
 
-    this.afd.database
-      .ref('accesos')
-      .orderByChild('sessionKey')
-      .equalTo(acceso.sessionKey)
-      .once(
-        'value',
-        (snapshot) => {
-          if (snapshot.exists()) {
-            console.log(snapshot.val());
-            snapshot.forEach((val) => {
-              console.log(val.val().clientKey);
-              if(acceso.clientKey === val.val().clientKey) {
-                console.log(val.val().clientKey);
-                this.repetido=true;
-              }
-            });
-          }else {
-            this.repetido=false;
-          }
-        });
+    // this.afd.database
+    //   .ref('accesos')
+    //   .orderByChild('sessionKey')
+    //   .equalTo(acceso.sessionKey)
+    //   .once(
+    //     'value',
+    //     (snapshot) => {
+    //       if (snapshot.exists()) {
+    //         console.log(snapshot.val());
+    //         snapshot.forEach((val) => {
+    //           console.log(val.val().clientKey);
+    //           if(acceso.clientKey === val.val().clientKey) {
+    //             console.log(val.val().clientKey);
+    //             this.repetido=true;
+    //           }
+    //         });
+    //       }else {
+    //         this.repetido=false;
+    //       }
+    //     });
 
-     if (this.repetido===false) {
-       console.log(this.repetido);
+    //  if (this.repetido===false) {
+    //    console.log(this.repetido);
       return this.accesos.push({
         fechaHoraEntrada: acceso.fechaHoraEntrada,
         dni: acceso.dni,
@@ -62,9 +62,10 @@ export class EntranceService {
         sessionKey: acceso.sessionKey
       });
 
-     }else {
-      return;
-     }
+    //  }else {
+    //    console.log(this.repetido);
+    //   return;
+    //  }
 
     // return this.afd.database
     //   .ref('accesos')

@@ -10,13 +10,14 @@ def capacitor_pods
   pod 'Capacitor', :path => '../../node_modules/@capacitor/ios'
   pod 'CapacitorCordova', :path => '../../node_modules/@capacitor/ios'
   pod 'CapacitorCommunityBarcodeScanner', :path => '..\..\node_modules\@capacitor-community\barcode-scanner'
+  pod 'CapacitorCommunityCapacitorGooglemapsNative', :path => '..\..\node_modules\@capacitor-community\capacitor-googlemaps-native'
   pod 'CapacitorApp', :path => '..\..\node_modules\@capacitor\app'
   pod 'CapacitorCamera', :path => '..\..\node_modules\@capacitor\camera'
   pod 'CapacitorFilesystem', :path => '..\..\node_modules\@capacitor\filesystem'
+  pod 'CapacitorGeolocation', :path => '..\..\node_modules\@capacitor\geolocation'
   pod 'CapacitorHaptics', :path => '..\..\node_modules\@capacitor\haptics'
   pod 'CapacitorKeyboard', :path => '..\..\node_modules\@capacitor\keyboard'
   pod 'CapacitorStatusBar', :path => '..\..\node_modules\@capacitor\status-bar'
-  pod 'CordovaPlugins', :path => '../capacitor-cordova-ios-plugins'
 end
 
 target 'App' do

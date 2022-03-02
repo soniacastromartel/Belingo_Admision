@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  mapsKey: 'AIzaSyDGWooJuSosEYxBL7wva2WrugdygSEd05k',
   firebase: {
     apiKey: 'AIzaSyC4eUvTKEwFGcGZoiKUdPduoZZ0rPRqYOU',
     authDomain: 'belingo-29222.firebaseapp.com',

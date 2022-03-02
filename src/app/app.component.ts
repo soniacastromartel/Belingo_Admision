@@ -3,8 +3,9 @@ import { Observable } from 'rxjs';
 import { Componente } from './interfaces/icomponent';
 import { DataService } from './services/client.service';
 
-import { Globalization } from '@ionic-native/globalization/ngx';
-import { TranslateService } from '@ngx-translate/core';
+//Capacitor GoogleMaps
+import {CapacitorGoogleMaps} from '@capacitor-community/capacitor-googlemaps-native';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -17,23 +18,26 @@ export class AppComponent implements OnInit {
   constructor(
     private dataService: DataService,
     // private translateService: TranslateService,
-    private globalization: Globalization
+    // private globalization: Globalization
   ) {
     // this.checkDarkTheme();
     // this.translateService.setDefaultLang('es');
-    this.getLanguage();
+    // this.getLanguage();
+    //  CapacitorGoogleMaps.initialize({
+    //   key: environment.mapsKey
+    // });
   }
 
   ngOnInit() {
     this.componentes = this.dataService.getMenuOptions();
   }
 
-  getLanguage() {
-    this.globalization
-      .getPreferredLanguage()
-      .then((res) => console.log(res))
-      .catch((e) => console.log(e));
-  }
+  // getLanguage() {
+  //   this.globalization
+  //     .getPreferredLanguage()
+  //     .then((res) => console.log(res))
+  //     .catch((e) => console.log(e));
+  // }
 
   // checkDarkTheme() {
   //   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
